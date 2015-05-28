@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StatisticsPage</class>
+ <widget class="QWidget" name="StatisticsPage">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>623</width>
+    <height>527</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Digging</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QProgressBar {
+        background-color: #333333;
+        border-radius: 6px;
+        text-align: center;
+        color: white;
+}
+
+QProgressBar::chunk {
+        background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #AEC6CF, stop: 1 #AEC6FF);
+        border-radius: 6px; margin: 0px;
+}
+
+QScrollArea {
+        border-radius: 6px;
+        border-width: 0;
+        border-style: none;
+        padding: 8px;
+        background-color: #111;
+        color: white;
+}
+
+QSpinBox {
+        border-radius: 4px;
+        border-width: 0;
+        border-style: none;
+        padding: 8px;
+        background-color: #111;
+        color: white;
+}
+
+QVBoxLayout {
+        border-radius: 6px;
+        border-width: 0;
+        border-style: none;
+        padding: 8px;
+        background-color: #111;
+        color: white;
+}
+
+QDialog, QMainWindow, QFrame {
+        color: white;
+        background-color: #333333;
+        border: none;
+}
+
+QMenu {
+        background-color: #333333; color: white;
+}
+
+QLabel {
+        background-color: transparent;
+}
+
+QCheckBox {
+        border-radius: 2px;
+        border-width: 0;
+        border-style: none;
+        padding: 3px;
+        background-color: #111;
+        color: white;
+}
+
+QFrame#central { background-color: #333333; border: none }
+QFrame#frame, QFrame#frame_2, QFrame#frame_3 {
+        background-color: #333333;
+        border-style: plain;
+        border-width: 20px;
+        border-radius: 15px;
+        border-color: #111;
+        min-width: 10em;
+        padding: 6px;
+}
+QLabel[openExternalLinks=true], QHeaderView { color: #aaaaaa }
+QLabel[openExternalLinks=false] { color: white; font-weight: normal }
+QPushButton, QToolButton {
+        border: 4px solid #111;
+        border-radius: 7px;
+        background-color: #111;
+        color: white;
+        padding: 6px;
+        margin: 6px;
+}
+QPushButton:pressed, QToolButton:checked {
+        color: #AEC6CF;
+}
+QPushButton:pressed, QToolButton:pressed {
+        border-color: #AEC6DF;
+        color: #AEC6DF;
+}
+QPushButton:disabled, QToolButton:disabled {
+        color: #444;
+        background-color: #222;
+}
+
+
+#scrollAreaWidgetContents QToolButton {
+        border-radius: 8px;
+        border-width: 0px;
+}
+
+/* the background-color is overridden to transparent for mac os x
+   due to the entire toolbar area not being drawable in a regular
+   QMainWindow
+*/
+QToolBar { background: #333333; border: 0px solid black; padding: 3px; }
+
+QToolBar::handle { image: url(handle.png); }
+QStatusBar { background: #333333; }
+QMenuBar { background: #333333; }
+QMenuBar::item { background: #333333; color: white; }
+
+#scrollAreaWidgetContents { background: #222 }
+#scrollAreaWidgetContents &gt; QFrame { background-color: #222; border-width: 0px; border-style: none; }
+
+QLineEdit {
+        border-radius: 6px;
+        border-width: 2px;
+        border-color: #222;
+        padding: 8px;
+        background-color: #111;
+        color: white;
+}
+
+QComboBox {
+        border-radius: 6px;
+        border-width: 0;
+        border-style: none;
+        padding: 8px;
+        background-color: #111;
+        color: white;
+}
+
+QComboBox::drop-down {
+        border-width: 0;
+        border-style: none;
+        background-color: #111;
+        color: white;
+}
+
+QTableView {
+        background: #111;
+        color: white;
+        border-style: none;
+        selection-background-color: #aaaaaa;
+    alternate-background-color: #222;
+        selection-color: #111;
+        border: 0px solid black;
+}
+
+QHeaderView { color: #aaaaaa; background-color: #111; background-image: none; }
+QHeaderView::section { color: #aaaaaa; background-color: #222; }
+QHeaderView::section:checked { background-color: #111; }
+
+QTabWidget {
+        background: #111;
+}
+
+ QTabWidget::pane {
+     border-top: 2px solid #111;
+     border: 4px solid #111;
+     border-bottom-left-radius: 8px;
+     border-bottom-right-radius: 8px;
+     border-top-right-radius: 8px;
+        background: #111;
+ }
+
+ QTabWidget::tab-bar {
+     left: 5px; /* move to the right by 5px */
+ }
+
+ /* Style the tab using the tab sub-control. Note that
+     it reads QTabBar _not_ QTabWidget */
+ QTabBar::tab {
+     background: #111;
+     border: 4px solid #222;
+     border-bottom-color: #111; /* same as the pane color */
+     border-top-left-radius: 4px;
+     border-top-right-radius: 4px;
+     min-width: 8ex;
+     padding: 4px;
+     color: #888;
+ }
+
+ QTabBar::tab:selected, QTabBar::tab:hover {
+     color: #aaaaaa
+ }
+
+ QTabBar::tab:selected {
+     border-color: #111; /* same as pane color */
+     border-top-color: #aaaaaa;
+ }
+
+ QTabBar::tab:!selected {
+     margin-top: 2px; /* make non-selected tabs look smaller */
+ }
+
+ /* make use of negative margins for overlapping tabs */
+ QTabBar::tab:selected {
+     /* expand/overlap to the left and right by 4px */
+     margin-left: -4px;
+     margin-right: -4px;
+ }
+
+ QTabBar::tab:first:selected {
+     margin-left: 0; /* the first selected tab has nothing to overlap with on the left */
+ }
+
+ QTabBar::tab:last:selected {
+     margin-right: 0; /* the last selected tab has nothing to overlap with on the right */
+ }
+
+ QTabBar::tab:only-one {
+     margin: 0; /* if there is only one tab, we don't want overlapping margins */
+ }
+
+
+</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMaximumSize</enum>
+   </property>
+   <item row="0" column="1">
+    <widget class="QFrame" name="frame">
+     <property name="minimumSize">
+      <size>
+       <width>182</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>70</y>
+        <width>201</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; text-decoration: underline;&quot;&gt;Info&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Block 1 -&amp;gt; 43200: &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Proof of Work&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Block 43200 -&amp;gt;: &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Proof of Stake&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QFrame" name="gridFrame_2">
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <property name="spacing">
+         <number>7</number>
+        </property>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <layout class="QFormLayout" name="formLayout_2">
+        <property name="fieldGrowthPolicy">
+         <enum>QFormLayout::FieldsStayAtSizeHint</enum>
+        </property>
+        <property name="horizontalSpacing">
+         <number>139</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>18</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Block Height&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="heightBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>00000</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;PoW Block Reward&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="rewardBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>250</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;PoW difficulty&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="diffBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>0.0002</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;PoS difficulty&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="diffBox2">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>0.0002</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="pawrateBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>0 MH/s</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label3_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Last block time&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="localBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>0 KH/s</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label1_2">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Connections&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="connectionBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Total Volume&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLabel" name="volumeBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>250</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Total stake weight&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QLabel" name="minBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Network stake weight&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="QLabel" name="maxBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Mining Phase&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="1">
+         <widget class="QLabel" name="cBox">
+          <property name="font">
+           <font>
+            <family>Open Sans,sans-serif</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>POW</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:600;&quot;&gt;Net Hashrate&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="startButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>225</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Update Statistics</string>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
