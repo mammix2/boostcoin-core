@@ -2,7 +2,7 @@
 
 TEMPLATE = app
 DEFINES += FN1 FN2
-FN1 = boostcoin
+FN1 = boostcoin-core
 FN2 = -qt
 VERSION = 3.6.0.0
 TARGET = $$FN1$$FN2
