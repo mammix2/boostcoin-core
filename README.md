@@ -1,5 +1,7 @@
 
-BoostCoin 
+BoostCoin core
+
+Use this repo for the cut down version of the wallet.
 
 The first ever x13 PoW / PoS coin.
 
