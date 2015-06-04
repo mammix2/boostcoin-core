@@ -78,7 +78,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     notificator(0),
     rpcConsole(0)
 {
-    resize(800, 600);
+    resize(800, 500);
     setWindowTitle(tr("BoostCoin Core wallet"));
 
 
@@ -350,6 +350,13 @@ void BitcoinGUI::createMenuBar()
     file->addSeparator();
     file->addAction(quitAction);
 
+    QMenu *menu = appMenuBar->addMenu(tr("&Menu"));
+    menu->addAction(overviewAction);
+    menu->addAction(sendCoinsAction);
+    menu->addAction(receiveCoinsAction);
+    menu->addAction(historyAction);
+    menu->addAction(addressBookAction);
+	
     QMenu *settings = appMenuBar->addMenu(tr("&Settings"));
     settings->addAction(encryptWalletAction);
     settings->addAction(changePassphraseAction);
@@ -455,7 +462,7 @@ void BitcoinGUI::createTrayIcon()
     trayIcon = new QSystemTrayIcon(this);
     trayIconMenu = new QMenu(this);
     trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setToolTip(tr("B")+("o")+("o")+("s")+("t")+("C")+("o")+("i")+("n") + ("client"));
+    trayIcon->setToolTip(tr("BoostCoin Core client"));
     trayIcon->setIcon(QIcon(":/icons/toolbar"));
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
             this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));

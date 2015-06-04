@@ -174,9 +174,13 @@ void SendCoinsDialog::on_sendButton_clicked()
     WalletModel::SendCoinsReturn sendstatus;
 
     if (!model->getOptionsModel() || !model->getOptionsModel()->getCoinControlFeatures())
+	{
         sendstatus = model->sendCoins(recipients);
+	}
     else
+	{
         sendstatus = model->sendCoins(recipients, CoinControlDialog::coinControl);
+	}
 
     switch(sendstatus.status)
     {

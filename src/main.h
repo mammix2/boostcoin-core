@@ -28,7 +28,7 @@ class CRequestTracker;
 class CNode;
 
 static const int LAST_POW_BLOCK = 43200; // at 60 second blocks will be about 30 days from launch
-
+static const int LAST_OLD_POS_BLOCK = 50000000; // to be set in the future when PoS changes
 static const unsigned int MAX_BLOCK_SIZE = 1000000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
@@ -55,6 +55,8 @@ static const int fHaveUPnP = false;
 #endif
 
 
+
+// boundaries in preparation for time drift change in future hard fork
 inline int64_t PastDrift(int64_t nTime)   {
     if (nTime < 4579862332){
         return nTime - 24 * 60 * 60;

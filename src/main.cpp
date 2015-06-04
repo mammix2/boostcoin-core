@@ -988,15 +988,19 @@ int64_t GetProofOfWorkReward(int64_t nFees)
     }
 }
 
-const int DAILY_BLOCKCOUNT =  1440;
 // miner's coin stake reward based on coin age spent (coin-days)
 int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
 {
     int64_t nRewardCoinYear;
 
     nRewardCoinYear = MAX_MINT_PROOF_OF_STAKE;
-
-    int64_t nSubsidy = nCoinAge * nRewardCoinYear / 365 / COIN;
+    int64_t nSubsidy;
+    
+    if(pindexBest->nHeight > LAST_OLD_POS_BLOCK) {
+        nSubsidy = nCoinAge * nRewardCoinYear * 2 / 365;
+    } else {
+        nSubsidy = nCoinAge * nRewardCoinYear / 365 / COIN;
+    }
 
 
     if (fDebug && GetBoolArg("-printcreation"))
@@ -1068,7 +1072,7 @@ unsigned int static GetNextWorkRequired_legacy(const CBlockIndex* pindexLast)
         return pindexLast->nBits;
     }
 
-    // Genesiscoin: This fixes an issue where a 51% attack can change difficulty at will.
+    // This fixes an issue where a 51% attack can change difficulty at will.
     // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
     int blockstogoback = nInterval-1;
     if ((pindexLast->nHeight+1) != nInterval)
@@ -1104,7 +1108,7 @@ unsigned int static GetNextWorkRequired_legacy(const CBlockIndex* pindexLast)
     return bnNew.GetCompact();
 }
 
-static unsigned int GetNextTargetRequired_(const CBlockIndex* pindexLast, bool fProofOfStake)
+static unsigned int GetNextTargetRequired_DGW(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
     CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : bnProofOfWorkLimit;
 
@@ -1145,7 +1149,7 @@ unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfS
     else
         change = 250;
     if(pindexLast->nHeight + 1 > change)
-        return GetNextTargetRequired_(pindexLast, fProofOfStake);
+        return GetNextTargetRequired_DGW(pindexLast, fProofOfStake);
     else
         return GetNextWorkRequired_legacy(pindexLast);
 }
@@ -1984,7 +1988,16 @@ bool CTransaction::GetCoinAge(CTxDB& txdb, uint64_t& nCoinAge) const
             printf("coin age nValueIn=%"PRId64" nTimeDiff=%d bnCentSecond=%s\n", nValueIn, nTime - txPrev.nTime, bnCentSecond.ToString().c_str());
     }
 
-    CBigNum bnCoinDay = bnCentSecond * CENT / (24 * 60 * 60);
+	
+    CBigNum bnCoinDay;
+
+    if(pindexBest->nHeight > LAST_OLD_POS_BLOCK) {
+        bnCoinDay = bnCentSecond * CENT / COIN / (24 * 60 * 60);
+    }else{
+        bnCoinDay = bnCentSecond * CENT / (24 * 60 * 60);
+    }
+
+    
     if (fDebug && GetBoolArg("-printcoinage"))
         printf("coin age bnCoinDay=%s\n", bnCoinDay.ToString().c_str());
     nCoinAge = bnCoinDay.getuint64();
@@ -2555,10 +2568,6 @@ bool LoadBlockIndex(bool fAllowNew)
         bnTrustedModulus.SetHex("d01f952e1090a5a72a3eda261083256596ccc192935ae1454c2bafd03b09e6ed11811be9f3a69f5783bbbced8c6a0c56621f42c2d19087416facf2f13cc7ed7159d1c5253119612b8449f0c7f54248e382d30ecab1928dbf075c5425dcaee1a819aa13550e0f3227b8c685b14e0eae094d65d8a610a6f49fff8145259d1187e4c6a472fa5868b2b67f957cb74b787f4311dbc13c97a2ca13acdb876ff506ebecbb904548c267d68868e07a32cd9ed461fbc2f920e9940e7788fed2e4817f274df5839c2196c80abe5c486df39795186d7bc86314ae1e8342f3c884b158b4b05b4302754bf351477d35370bad6639b2195d30006b77bf3dbb28b848fd9ecff5662bf39dde0c974e83af51b0d3d642d43834827b8c3b189065514636b8f2a59c42ba9b4fc4975d4827a5d89617a3873e4b377b4d559ad165748632bd928439cfbc5a8ef49bc2220e0b15fb0aa302367d5e99e379a961c1bc8cf89825da5525e3c8f14d7d8acca2fa9c133a2176ae69874d8b1d38b26b9c694e211018005a97b40848681b9dd38feb2de141626fb82591aad20dc629b2b6421cef1227809551a0e4e943ab99841939877f18f2d9c0addc93cf672e26b02ed94da3e6d329e8ac8f3736eebbf37bb1a21e5aadf04ee8e3b542f876aa88b2adf2608bd86329b7f7a56fd0dc1c40b48188731d11082aea360c62a0840c2db3dad7178fd7e359317ae081");
     }
 
-#if 0
-    // Set up the Zerocoin Params object
-    ZCParams = new libzerocoin::Params(bnTrustedModulus);
-#endif
 
     //
     // Load block index
@@ -2594,7 +2603,7 @@ bool LoadBlockIndex(bool fAllowNew)
         {
             block.nNonce   = 1908795;
         }
-        if (true  && (block.GetHash() != hashGenesisBlock)) {
+        if (false  && (block.GetHash() != hashGenesisBlock)) {
 
         // This will figure out a valid hash and Nonce if you're
         // creating a different genesis block:
