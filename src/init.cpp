@@ -316,11 +316,6 @@ std::string HelpMessage()
         "  -rpcsslcertificatechainfile=<file.cert>  " + _("Server certificate file (default: server.cert)") + "\n" +
         "  -rpcsslprivatekeyfile=<file.pem>         " + _("Server private key (default: server.pem)") + "\n" +
         "  -rpcsslciphers=<ciphers>                 " + _("Acceptable ciphers (default: TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!AH:!3DES:@STRENGTH)") + "\n";
-		
-		"\n" + _("Secure messaging options:") + "\n" +
-        "  -nosmsg                                  " + _("Disable secure messaging.") + "\n" +
-        "  -debugsmsg                               " + _("Log extra debug messages.") + "\n" +
-        "  -smsgscanchain                           " + _("Scan the block chain for public key addresses on startup.") + "\n";
 
     return strUsage;
 }
@@ -438,14 +433,9 @@ bool AppInit2()
 
     // -debug implies fDebug*
     if (fDebug)
-    {
         fDebugNet  = true;
-
-    } else
-    {
+    else
         fDebugNet  = GetBoolArg("-debugnet");
-
-    }
 
     
     bitdb.SetDetach(GetBoolArg("-detachdb", false));
@@ -665,6 +655,7 @@ bool AppInit2()
         SetProxy(NET_TOR, addrOnion, 5);
         SetReachable(NET_TOR);
     }
+
 
     // see Step 2: parameter interactions for more information about these
     fNoListen = !GetBoolArg("-listen", true);
@@ -952,7 +943,6 @@ bool AppInit2()
 
     printf("Loaded %i addresses from peers.dat  %"PRId64"ms\n",
            addrman.size(), GetTimeMillis() - nStart);
-		   
 
     // ********************************************************* Step 11: start node
 

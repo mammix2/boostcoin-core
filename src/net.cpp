@@ -1957,6 +1957,8 @@ void StartNode(void* parg)
         if (!NewThread(ThreadOnionSeed, NULL))
             printf("Error: NewThread(ThreadOnionSeed) failed\n");
 
+
+
     // Map ports with UPnP
     if (fUseUPnP)
         MapPort();

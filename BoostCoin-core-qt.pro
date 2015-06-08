@@ -4,7 +4,7 @@ TEMPLATE = app
 DEFINES += FN1 FN2
 FN1 = boostcoin-core
 FN2 = -qt
-VERSION = 3.6.1.0
+VERSION = 3.6.1.1
 TARGET = $$FN1$$FN2
 INCLUDEPATH += src src/json \
     src/qt \
