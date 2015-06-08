@@ -204,6 +204,7 @@ OBJS= \
 	obj/key.o \
 	obj/db.o \
 	obj/init.o \
+	obj/irc.o \
 	obj/keystore.o \
 	obj/miner.o \
 	obj/main.o \
@@ -227,12 +228,7 @@ OBJS= \
 	obj/scrypt.o \
 	obj/scrypt-arm.o \
 	obj/scrypt-x86.o \
-	obj/scrypt-x86_64.o \
-	obj/json_spirit_reader.o \
-	obj/json_spirit_writer.o \
-	leveldb/libleveldb.a \
-	obj/leveldb.o \
-	obj/txdb.o
+	obj/scrypt-x86_64.o 
 
 all: boostcoind
 
