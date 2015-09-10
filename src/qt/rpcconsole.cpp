@@ -4,6 +4,7 @@
 #include "clientmodel.h"
 #include "bitcoinrpc.h"
 #include "guiutil.h"
+#include "init.h"
 
 #include <QTime>
 #include <QTimer>
@@ -209,6 +210,16 @@ RPCConsole::RPCConsole(QWidget *parent) :
     startExecutor();
 
     clear();
+
+    int isfDark = GetArg("-torproxy", 0);
+
+    if (isfDark == 1) {
+        ui->labelTorLogo->setEnabled(true);
+        ui->isTorProxy->setChecked(true);
+        ui->isTorProxy->setText("Connected via native Tor proxy");
+    }
+
+
 }
 
 RPCConsole::~RPCConsole()

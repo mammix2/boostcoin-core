@@ -19,7 +19,7 @@
 #include "txdb.h"
 #include "util.h"
 #include "main.h"
-#include "genesis.h"
+#include "checkblocks.h"
 
 using namespace std;
 using namespace boost;

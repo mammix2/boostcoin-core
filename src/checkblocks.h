@@ -1,5 +1,5 @@
-#ifndef GENESIS_H
-#define GENESIS_H
+#ifndef CHECKBLOCKS_H
+#define CHECKBLOCKS_H
 
 #include "bignum.h"
 
@@ -7,7 +7,7 @@
 static const uint256 hashGenesisBlock("00000e81cae8e8cbbf9679d53ff1df5e23062dc667a332fd121f86e68f5d25e3");
 static const uint256 hashGenesisBlockTestNet("0000bfc0a4fd7d2215718380aae7e92f0821b0c4785a64039b173840ea1c36fb");
 
-// Chechpoints to ensure the correct chain usage
+// Chechpoints to ensure the correct chain usage during sync
 
 static const uint256 CheckBlock1 ("000000ff3b169878019e2ef990113cb47dfe4b92d18f49ac0233011b89d0ae3b"); // Checkpoint at block 100
 static const uint256 CheckBlock2 ("00000000087645f692b29da415d7cc55e0d0925ed1492c4703c2c4b634b8f29b"); // Checkpoint at block 1000
@@ -20,8 +20,10 @@ static const uint256 CheckBlock8 ("20cc8a57580d99c07f2f3c77aab95f54ead88feb6a1d2
 static const uint256 CheckBlock9 ("c9c0e2e598da65a7a2036586403003f9994ccfaa7906fb2caaab5a50361ce049"); // Checkpoint at block 156000
 static const uint256 CheckBlock10 ("d509595cfd52380ac4059e8baedd01e3ac89694279c5fd79d2693308cf8ffa3e"); // Checkpoint at block 306500
 static const uint256 CheckBlock11 ("9801f200e470a13aca3c3fd54f0a17e5945eea24b378c535a008835af527beb0"); // checkpoint at block 489550
+static const uint256 CheckBlock12 ("9dcdc9959bb6d16f6fc852f8a77828779d265d45c52ec216f6a7d235a689ee1d"); // Checkpoint at block 600000
 
-// TODO: Move Kernel checksum in here
+// Testnet Checkpoints
+static const uint256 TestNetCheckBlock1 ("0000003b92febb5b04be82117fcbe7f1d422c305ddb4303e0d51ce32482d6304"); //Testnet Checkpoint at block 5000
 
 
-#endif // GENESIS_H
+#endif // CHECKBLOCKS_H

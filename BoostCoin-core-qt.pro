@@ -1,21 +1,19 @@
 # x13 version by Mammix2
 
+
 TEMPLATE = app
 DEFINES += FN1 FN2
 FN1 = boostcoin-core
 FN2 = -qt
-VERSION = 3.6.1.1
+VERSION = 4.0.0.3
 TARGET = $$FN1$$FN2
 INCLUDEPATH += src src/json \
     src/qt \
-    src/tor \
-    src/qt/plugins/mrichtexteditor \
-    src/xxhash \
-    src/lz4
+    src/tor
 QT += core gui network
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
-CONFIG += thread static
+CONFIG += thread
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 lessThan(QT_MAJOR_VERSION, 5): CONFIG += static
 QMAKE_CXXFLAGS = -fpermissive
@@ -164,7 +162,8 @@ SOURCES += \
     src/hamsi.c 
 
 ### tor sources
-SOURCES +=     src/tor/address.c \
+SOURCES += src/tor/anonymize.cpp \
+    src/tor/address.c \
     src/tor/addressmap.c \
     src/tor/aes.c \
     src/tor/backtrace.c \
@@ -217,7 +216,6 @@ SOURCES +=     src/tor/address.c \
     src/tor/onion_ntor.c \
     src/tor/onion_tap.c \
     src/tor/policies.c \
-    src/tor/anonymize.cpp \
     src/tor/procmon.c \
     src/tor/reasons.c \
     src/tor/relay.c \
@@ -240,7 +238,111 @@ SOURCES +=     src/tor/address.c \
     src/tor/torgzip.c \
     src/tor/tortls.c \
     src/tor/transports.c \
-    src/tor/util_codedigest.c
+    src/tor/util_codedigest.c \
+
+
+#### tor sources
+#SOURCES +=    src/tor/anonymize.cpp \
+#    src/tor/address.c \
+#    src/tor/addressmap.c \
+#    src/tor/aes.c \
+#    src/tor/backtrace.c \
+#    src/tor/buffers.c \
+#    src/tor/channel.c \
+#    src/tor/channeltls.c \
+#    src/tor/circpathbias.c \
+#    src/tor/circuitbuild.c \
+#    src/tor/circuitlist.c \
+#    src/tor/circuitmux.c \
+#    src/tor/circuitmux_ewma.c \
+#    src/tor/circuitstats.c \
+#    src/tor/circuituse.c \
+#    src/tor/command.c \
+#    src/tor/compat.c \
+#    src/tor/compat_libevent.c \
+#    src/tor/compat_threads.c \
+#    src/tor/compat_winthreads.c \
+#    src/tor/config.c \
+##    src/tor/config_codedigest.c \
+#    src/tor/confparse.c \
+#    src/tor/connection.c \
+#    src/tor/connection_edge.c \
+#    src/tor/connection_or.c \
+#    src/tor/container.c \
+#    src/tor/control.c \
+#    src/tor/cpuworker.c \
+#    src/tor/crypto.c \
+#    src/tor/crypto_curve25519.c \
+##    src/tor/crypto_ed25519.c \
+#    src/tor/crypto_format.c \
+#    src/tor/crypto_pwbox.c \
+#    src/tor/crypto_s2k.c \
+#    src/tor/csiphash.c \
+#    src/tor/curve25519-donna.c \
+##    src/tor/curve25519-donna-c64.c \
+#    src/tor/di_ops.c \
+#    src/tor/directory.c \
+#    src/tor/dircollate.c \
+#    src/tor/dirserv.c \
+#    src/tor/dirvote.c \
+#    src/tor/dns.c \
+#    src/tor/dnsserv.c \
+#    src/tor/entrynodes.c \
+##    src/tor/ed25519.c \
+##    src/tor/ed25519_tor.c \
+#    src/tor/ext_orport.c \
+#    src/tor/fp_pair.c \
+#    src/tor/geoip.c \
+#    src/tor/hibernate.c \
+#    src/tor/keypin.c \
+#    src/tor/log.c \
+#    src/tor/link_handshake.c \
+#    src/tor/memarea.c \
+##    src/tor/mempool.c \
+#    src/tor/microdesc.c \
+#    src/tor/networkstatus.c \
+#    src/tor/ntmain.c \
+#    src/tor/nodelist.c \
+#    src/tor/onion.c \
+#    src/tor/onion_fast.c \
+#    src/tor/onion_main.c \
+#    src/tor/onion_ntor.c \
+#    src/tor/onion_tap.c \
+#    src/tor/policies.c \
+#    src/tor/procmon.c \
+#    src/tor/reasons.c \
+#    src/tor/relay.c \
+#    src/tor/rendcache.c \
+#    src/tor/rendclient.c \
+#    src/tor/rendcommon.c \
+#    src/tor/rendmid.c \
+#    src/tor/rendservice.c \
+#    src/tor/rephist.c \
+#    src/tor/replaycache.c \
+#    src/tor/router.c \
+#    src/tor/routerkeys.c \
+#    src/tor/routerlist.c \
+#    src/tor/routerparse.c \
+#    src/tor/routerset.c \
+#    src/tor/sandbox.c \
+#    src/tor/scheduler.c \
+#    src/tor/statefile.c \
+#    src/tor/status.c \
+#    src/tor/strlcat.c \
+#    src/tor/strlcpy.c \
+##    src/tor/tor_util.c \
+#    src/tor/test-internals.c \
+#    src/tor/tor_main.c \
+#    src/tor/torcert.c \
+#    src/tor/torgzip.c \
+#    src/tor/tortls.c \
+#    src/tor/transports.c \
+#    src/tor/trunnel.c \
+##    src/tor/util_codedigest.c
+#    src/tor/util_t.c \
+#    src/tor/util_format.c \
+#    src/tor/util_process.c \
+#    src/tor/workqueue.c
 
 ##encryption + compression sources
 SOURCES +=  src/lz4/lz4.c \
@@ -320,7 +422,6 @@ HEADERS += src/qt/bitcoingui.h \
     src/checkpoints.h \
     src/compat.h \
     src/coincontrol.h \
-    src/genesis.h \
     src/sync.h \
     src/util.h \
     src/uint256.h \
@@ -379,7 +480,6 @@ HEADERS += src/qt/bitcoingui.h \
     src/allocators.h \
     src/ui_interface.h \
     src/qt/rpcconsole.h \
-    src/qt/plugins/mrichtexteditor/mrichtextedit.h \
     src/qt/qvalidatedtextedit.h \
     src/version.h \
     src/netbase.h \
@@ -405,6 +505,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/sph_types.h \
     src/threadsafety.h \
     src/txdb-leveldb.h 
+    src/checkblocks.h
 
 SOURCES += src/qt/bitcoin.cpp \
     src/qt/bitcoingui.cpp \
@@ -420,7 +521,6 @@ SOURCES += src/qt/bitcoin.cpp \
     src/qt/editaddressdialog.cpp \
     src/qt/bitcoinaddressvalidator.cpp \
     src/qt/qvalidatedtextedit.cpp \
-    src/qt/plugins/mrichtexteditor/mrichtextedit.cpp \
     src/alert.cpp \
     src/version.cpp \
     src/sync.cpp \

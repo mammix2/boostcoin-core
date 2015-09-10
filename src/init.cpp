@@ -262,6 +262,7 @@ std::string HelpMessage()
         "  -bantime=<n>           " + _("Number of seconds to keep misbehaving peers from reconnecting (default: 86400)") + "\n" +
         "  -maxreceivebuffer=<n>  " + _("Maximum per-connection receive buffer, <n>*1000 bytes (default: 5000)") + "\n" +
         "  -maxsendbuffer=<n>     " + _("Maximum per-connection send buffer, <n>*1000 bytes (default: 1000)") + "\n" +
+        "  -torproxy=<n>         " + _("Find peers using .onion seeds over the Tor network (use -torproxy=<n> against binary, torproxy=<n> in .conf. default is 0, also disabled when using -connect)") + "\n" +
 
 #ifdef USE_UPNP
 #if USE_UPNP
@@ -433,9 +434,14 @@ bool AppInit2()
 
     // -debug implies fDebug*
     if (fDebug)
+    {
         fDebugNet  = true;
-    else
+
+    } else
+    {
         fDebugNet  = GetBoolArg("-debugnet");
+
+    }
 
     
     bitdb.SetDetach(GetBoolArg("-detachdb", false));
@@ -582,9 +588,9 @@ bool AppInit2()
     if (nSocksVersion != 4 && nSocksVersion != 5)
         return InitError(strprintf(_("Unknown -socks proxy version requested: %i"), nSocksVersion));
 
-    int isfTor = GetArg("-torproxy", 1);
+    int isfDark = GetArg("-torproxy", 1);
 
-    if (isfTor == 1)
+    if (isfDark == 1)
     {
         std::set<enum Network> nets;
         nets.insert(NET_TOR);
@@ -656,12 +662,11 @@ bool AppInit2()
         SetReachable(NET_TOR);
     }
 
-
     // see Step 2: parameter interactions for more information about these
     fNoListen = !GetBoolArg("-listen", true);
     fDiscover = GetBoolArg("-discover", true);
     fNameLookup = GetBoolArg("-dns", true);
-    fTorEnabled = GetArg("-torproxy", 1);
+    fDarkEnabled = GetArg("-torproxy", 1);
 #ifdef USE_UPNP
     fUseUPnP = GetBoolArg("-upnp", USE_UPNP);
 #endif
@@ -688,7 +693,7 @@ bool AppInit2()
                 fBound |= Bind(CService(inaddr_any, GetListenPort()), !fBound);
             }
 
-            if (isfTor == 1)
+            if (isfDark == 1)
             {
                 CService addrBind;
 
@@ -702,7 +707,7 @@ bool AppInit2()
             return InitError(_("Failed to listen on any port. Use -listen=0 if you want this."));
     }
 
-    if (isfTor == 1)
+    if (isfDark == 1)
     {
         if (!NewThread(StartTor, NULL))
                 InitError(_("Error: could not start tor node"));
@@ -723,7 +728,7 @@ bool AppInit2()
         }
     }
 
-    if (isfTor == 1)
+    if (isfDark == 1)
     {
         string automatic_onion;
         filesystem::path const hostname_path = GetDefaultDataDir() / "onion" / "hostname";
@@ -943,6 +948,7 @@ bool AppInit2()
 
     printf("Loaded %i addresses from peers.dat  %"PRId64"ms\n",
            addrman.size(), GetTimeMillis() - nStart);
+		   
 
     // ********************************************************* Step 11: start node
 

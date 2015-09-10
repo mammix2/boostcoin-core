@@ -41,6 +41,7 @@ private slots:
     void on_applyButton_clicked();
 
     void showRestartWarning_Proxy();
+    void showRestartWarning_fDark();
     void showRestartWarning_Lang();
     void updateDisplayUnit();
     void handleProxyIpValid(QValidatedLineEdit *object, bool fState);
@@ -53,6 +54,7 @@ private:
     OptionsModel *model;
     MonitoredDataMapper *mapper;
     bool fRestartWarningDisplayed_Proxy;
+    bool fRestartWarningDisplayed_fDark;
     bool fRestartWarningDisplayed_Lang;
     bool fProxyIpValid;
 };

@@ -6,7 +6,7 @@
 #include <boost/foreach.hpp>
 
 #include "checkpoints.h"
-#include "genesis.h"
+#include "checkblocks.h"
 
 #include "txdb.h"
 #include "main.h"
@@ -25,24 +25,27 @@ namespace Checkpoints
     //
     static MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
-        ( 0, hashGenesisBlock )
-        ( 100, CheckBlock1 )
-        ( 1000, CheckBlock2 )
-        ( 5002, CheckBlock3 )
-        ( 10000, CheckBlock4 )
-        ( 15001, CheckBlock5 )
-        ( 25002, CheckBlock6 )
-        ( 30001, CheckBlock7 )
-        ( 140000, CheckBlock8 )
-        ( 156000, CheckBlock9 )
-		( 306500, CheckBlock10 )
-        ( 489550, CheckBlock11 )
+            ( 0, hashGenesisBlock )
+            ( 100, CheckBlock1 )
+            ( 1000, CheckBlock2 )
+            ( 5002, CheckBlock3 )
+            ( 10000, CheckBlock4 )
+            ( 15001, CheckBlock5 )
+            ( 25002, CheckBlock6 )
+            ( 30001, CheckBlock7 )
+            ( 140000, CheckBlock8 )
+            ( 156000, CheckBlock9 )
+            ( 306500, CheckBlock10 )
+            ( 489550, CheckBlock11 )
+            ( 600000, CheckBlock12 )
     ;
 
     // TestNet has no checkpoints
     static MapCheckpoints mapCheckpointsTestnet =
         boost::assign::map_list_of
-        ( 0, hashGenesisBlockTestNet )
+            ( 0, hashGenesisBlockTestNet )
+            ( 5000, TestNetCheckBlock1 )
+
         ;
 
     bool CheckHardened(int nHeight, const uint256& hash)

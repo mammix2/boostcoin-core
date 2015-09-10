@@ -6,7 +6,7 @@
 
 #include "kernel.h"
 #include "txdb.h"
-#include "genesis.h"
+#include "checkblocks.h"
 
 using namespace std;
 
@@ -30,12 +30,14 @@ static std::map<int, unsigned int> mapStakeModifierCheckpoints =
         ( 156000, 0x7e8faba5u )
         ( 306500, 0xbe805182u )
         ( 489550, 0xa94df882u )
+        ( 600000, 0x279a9020u )
     ;
 
 // Hard checkpoints of stake modifiers to ensure they are deterministic (testNet)
 static std::map<int, unsigned int> mapStakeModifierCheckpointsTestNet =
     boost::assign::map_list_of
         ( 0, 0x0e00670bu )
+        ( 5000, 0x4b46f702u )
     ;
 
 // Get time weight
