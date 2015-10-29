@@ -1188,8 +1188,16 @@ static const char *strDNSSeed[][2] = {
     {"node7.bost.link", "node7.bost.link"},
     {"node8.bost.link", "node8.bost.link"},
     {"node9.bost.link", "node9.bost.link"},
-    {"node10.bost.link", "node10.bost.link"}
+    {"node10.bost.link", "node10.bost.link"},
 	
+};
+// hidden service seeds
+static const char *strMainNetOnionSeed[][1] = {
+    {"gjgbuc3l52fxea5o.onion"}, // node02
+    {"5hrzeemkppcdalp3.onion"}, // node04
+    {"uwbrmhzppueemse5.onion"}, // node03
+    {"a3uvtjxq4v2n2hih.onion"}, // node NetBK
+    {NULL}
 };
 
 void ThreadDNSAddressSeed(void* parg)
