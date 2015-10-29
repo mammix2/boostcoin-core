@@ -1,5 +1,5 @@
-#ifndef HASHBLOCK_H
-#define HASHBLOCK_H
+#ifndef HASHBLOCK13_H
+#define HASHBLOCK13_H
 
 #include "uint256.h"
 #include "sph_blake.h"
@@ -66,7 +66,7 @@ GLOBAL sph_fugue512_context      z_fugue;
 #define ZHAMSI (memcpy(&ctx_hamsi, &z_hamsi, sizeof(z_hamsi)))
 #define ZFUGUE (memcpy(&ctx_fugue, &z_fugue, sizeof(z_fugue)))
 template<typename T1>
-inline uint256 Hash9(const T1 pbegin, const T1 pend)
+inline uint256 Hash13(const T1 pbegin, const T1 pend)
 
 {
     sph_blake512_context     ctx_blake;
@@ -148,8 +148,4 @@ inline uint256 Hash9(const T1 pbegin, const T1 pend)
 }
 
 
-
-
-
-
-#endif // HASHBLOCK_H
+#endif // HASHBLOCK13_H

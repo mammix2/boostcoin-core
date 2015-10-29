@@ -11,10 +11,15 @@
 #include "init.h"
 #include "ui_interface.h"
 #include "kernel.h"
+#include "pow_control.h"
 #include "checkblocks.h"
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include <iostream>
+#include <openssl/rsa.h>
+#include <openssl/rand.h>
+#include <openssl/bn.h>
 
 
 using namespace std;
@@ -49,6 +54,7 @@ static const int64_t nTargetTimespan_legacy = nTargetSpacing * nRetarget; // eve
 static const int64_t nInterval = nTargetTimespan_legacy / nTargetSpacing;
 
 static const int64_t nTargetTimespan = 16 * 60;
+
 
 int64_t devCoin = 15 * COIN;
 int nCoinbaseMaturity = 100;
@@ -974,18 +980,32 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 {
     if (pindexBest->nHeight == 1)
       {
-        int64_t nSubsidy = 400000 * COIN;
-        if (fDebug && GetBoolArg("-printcreation"))
-        printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
-        return nSubsidy + nFees;
-      }
+			int64_t nSubsidy = 400000 * COIN;
+			if (fDebug && GetBoolArg("-printcreation"))
+			printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
+			return nSubsidy + nFees;
+		} 
+			else if (pindexBest->nHeight == 640337)
+		{
+			int64_t nSubsidy = 2000000 * COIN;
+			if (fDebug && GetBoolArg("-printcreation"))
+			printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
+			return nSubsidy + nFees;
+		}
+			else if (pindexBest->nHeight > 640337 && pindexBest->nHeight < P2_End)
+		{
+            int64_t nSubsidy = 15 * COIN;
+			if (fDebug && GetBoolArg("-printcreation"))
+			printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
+			return nSubsidy + nFees;
+		}		
     else
-    {
-        int64_t nSubsidy = 515 * COIN;
-        if (fDebug && GetBoolArg("-printcreation"))
-        printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
-        return nSubsidy + nFees;
-    }
+	{
+		int64_t nSubsidy = 515 * COIN;
+		if (fDebug && GetBoolArg("-printcreation"))
+		printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
+		return nSubsidy + nFees;
+	}
 }
 
 // miner's coin stake reward based on coin age spent (coin-days)
@@ -996,7 +1016,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     if(pindexBest->nHeight < LAST_OLD_POS_BLOCK) {
         nSubsidy = nCoinAge * POS_STAKE_REWARD / 365 / COIN; // original PoS reward
     } else {
-        nSubsidy = POS_STAKE_REWARD_V4; // PoS reward on V4 chain
+        nSubsidy = nCoinAge * POS_STAKE_REWARD / 365; // PoS reward on V4 chain
     }
 
 
@@ -2198,8 +2218,25 @@ bool CBlock::AcceptBlock()
     CBlockIndex* pindexPrev = (*mi).second;
     int nHeight = pindexPrev->nHeight+1;
 
-    if (IsProofOfWork() && nHeight > LAST_POW_BLOCK)
-        return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
+    if (IsProofOfWork()){
+        if (GetBoolArg("-testnet")){
+            if (nHeight > P1_End_TestNet && nHeight < P2_Start_TestNet){
+                return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
+            }
+            else if (nHeight > P2_End_TestNet){
+                return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
+            }
+        }else{
+            if (nHeight > P1_End && nHeight < P2_Start){
+                return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
+            }
+            else if (nHeight > P2_End){
+                return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
+            }
+        }
+
+    }
+
 
     // Check proof-of-work or proof-of-stake
     if (nBits != GetNextTargetRequired(pindexPrev, IsProofOfStake()))

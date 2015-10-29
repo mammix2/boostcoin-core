@@ -78,7 +78,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     notificator(0),
     rpcConsole(0)
 {
-    resize(800, 500);
+    resize(800, 600);
     setWindowTitle(tr("BoostCoin Core wallet"));
 
 

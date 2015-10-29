@@ -9,6 +9,7 @@
 #include "init.h"
 #include "miner.h"
 #include "bitcoinrpc.h"
+#include "pow_control.h"
 
 using namespace json_spirit;
 using namespace std;
@@ -122,8 +123,20 @@ Value getworkex(const Array& params, bool fHelp)
     if (IsInitialBlockDownload())
         throw JSONRPCError(-10, "BoostCoin is downloading blocks...");
 
-    if (pindexBest->nHeight >= LAST_POW_BLOCK)
-        throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+    if (GetBoolArg("-testnet")){
+        if (pindexBest->nHeight >= P1_End_TestNet && pindexBest->nHeight < P2_Start_TestNet){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        } else if (pindexBest->nHeight > P2_End_TestNet){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        }
+    }else {
+        if (pindexBest->nHeight >= P1_End && pindexBest->nHeight < P2_Start){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        } else if (pindexBest->nHeight > P2_End){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        }
+    }
+
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;
@@ -256,8 +269,19 @@ Value getwork(const Array& params, bool fHelp)
     if (IsInitialBlockDownload())
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "BoostCoin is downloading blocks...");
 
-    if (pindexBest->nHeight >= LAST_POW_BLOCK)
-        throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+    if (GetBoolArg("-testnet")){
+        if (pindexBest->nHeight >= P1_End_TestNet && pindexBest->nHeight < P2_Start_TestNet){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        } else if (pindexBest->nHeight > P2_End_TestNet){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        }
+    }else {
+        if (pindexBest->nHeight >= P1_End && pindexBest->nHeight < P2_Start){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        } else if (pindexBest->nHeight > P2_End){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        }
+    }
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;    // FIXME: thread safety
@@ -400,8 +424,19 @@ Value getblocktemplate(const Array& params, bool fHelp)
     if (IsInitialBlockDownload())
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "BoostCoin is downloading blocks...");
 
-    if (pindexBest->nHeight >= LAST_POW_BLOCK)
-        throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+    if (GetBoolArg("-testnet")){
+        if (pindexBest->nHeight >= P1_End_TestNet && pindexBest->nHeight < P2_Start_TestNet){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        } else if (pindexBest->nHeight > P2_End_TestNet){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        }
+    }else {
+        if (pindexBest->nHeight >= P1_End && pindexBest->nHeight < P2_Start){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        } else if (pindexBest->nHeight > P2_End){
+            throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+        }
+    }
 
     static CReserveKey reservekey(pwalletMain);
 

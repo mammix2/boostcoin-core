@@ -27,8 +27,7 @@ class CInv;
 class CRequestTracker;
 class CNode;
 
-static const int LAST_POW_BLOCK = 43200; // at 60 second blocks will be about 30 days from launch
-static const int LAST_OLD_POS_BLOCK = 760000; // estimated block arrival wednesday 2nd of december 2015
+static const int LAST_OLD_POS_BLOCK = 645000;
 static const unsigned int MAX_BLOCK_SIZE = 1000000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
@@ -40,8 +39,7 @@ static const int64_t MAX_MONEY = 40000000 * COIN;
 static const int64 MIN_TXOUT_AMOUNT = MIN_TX_FEE;
 static const int64_t COIN_YEAR_REWARD = 1 * CENT; // 1% per year
 static const int64_t POS_STAKE_REWARD = 0.1 * COIN; // 10% annual interest
-static const int64_t POS_STAKE_REWARD_V4 = 1 * COIN; // V4 new pos reward at 1 Coin per block
-static const int V4_CHAIN_PARAMS_TIME = 1447358400; // V4 chain switch over at Thursday 12 Nov 2015 20:00:00 GMT
+static const int V4_CHAIN_PARAMS_TIME = 1450180800; // V4 chain switch
 
 #define FOUNDATION "BKqAh5ojyS7bkjaDHJEWXxMwKNUvUsNZak"
 #define FOUNDATION_TEST "myLSiixUQwdiGGvmSvZBNBHR7C8bmMkBdr"
@@ -926,8 +924,9 @@ public:
 
     uint256 GetHash() const
     {
-        return Hash9(BEGIN(nVersion), END(nNonce));
+        return Hash13(BEGIN(nVersion), END(nNonce));
     }
+
 
     int64_t GetBlockTime() const
     {

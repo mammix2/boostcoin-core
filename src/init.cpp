@@ -11,6 +11,7 @@
 #include "ui_interface.h"
 #include "tor/anonymize.h"
 #include "checkpoints.h"
+#include "pow_control.h"
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/filesystem/convenience.hpp>

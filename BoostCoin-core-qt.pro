@@ -5,7 +5,7 @@ TEMPLATE = app
 DEFINES += FN1 FN2
 FN1 = boostcoin-core
 FN2 = -qt
-VERSION = 4.0.0.3
+VERSION = 4.1.0.7
 TARGET = $$FN1$$FN2
 INCLUDEPATH += src src/json \
     src/qt \
@@ -487,7 +487,6 @@ HEADERS += src/qt/bitcoingui.h \
     src/bloom.h \
     src/checkqueue.h \
     src/hash.h \
-    src/hashblock.h \
     src/limitedmap.h \
     src/sph_blake.h \
     src/sph_bmw.h \
@@ -504,8 +503,10 @@ HEADERS += src/qt/bitcoingui.h \
     src/sph_hamsi.h \
     src/sph_types.h \
     src/threadsafety.h \
-    src/txdb-leveldb.h 
-    src/checkblocks.h
+    src/txdb-leveldb.h \
+    src/pow_control.h \
+    src/checkblocks.h \
+    src/hashblock.h
 
 SOURCES += src/qt/bitcoin.cpp \
     src/qt/bitcoingui.cpp \
