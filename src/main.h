@@ -54,9 +54,7 @@ static const int fHaveUPnP = true;
 static const int fHaveUPnP = false;
 #endif
 
-
-
-// boundaries in preparation for time drift change in future hard fork
+// new boundaries in preparation for time drift change in future hard fork
 inline int64_t PastDrift(int64_t nTime)   {
     if (nTime < V4_CHAIN_PARAMS_TIME){
         return nTime - 24 * 60 * 60;
