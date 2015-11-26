@@ -1196,7 +1196,7 @@ static const char *strMainNetOnionSeed[][1] = {
     {"gjgbuc3l52fxea5o.onion"}, // node02
     {"5hrzeemkppcdalp3.onion"}, // node04
     {"uwbrmhzppueemse5.onion"}, // node03
-    {"a3uvtjxq4v2n2hih.onion"}, // node NetBK
+    {"5kbw5bcuudj2s75s.onion"}, // node05
     {NULL}
 };
 
