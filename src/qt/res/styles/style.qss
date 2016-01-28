@@ -1,22 +1,22 @@
 QDialog {
         color: white;
-        background-color: #444444;
+        background-color: #333333;
         border: none;
 }
 
 QMainWindow {
         color: white;
-        background-color: #444444;
+        background-color: #333333;
         border: none;
 }
 
 QMenu {
-        background-color: #444444;
+        background-color: #333333;
         color: white;
 }
 
 QMenu::item:selected {
-        background-color: #F43050;
+        background-color: #AEC6CF;
         color: white;
 }
 
@@ -26,14 +26,14 @@ QMenu::item:hover {
 }
 
 QProgressBar {
-        background-color: #444444;
+        background-color: #333333;
         border-radius: 6px;
         text-align: center;
         color: white;
 }
 
 QProgressBar::chunk {
-        background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #330000, stop: 1 #F43050);
+        background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #330000, stop: 1 #AEC6CF);
         border-radius: 6px; margin: 0px;
 }
 
@@ -74,12 +74,12 @@ QVBoxLayout {
 }
 
 QFrame#central {
-        background-color: #444444;
+        background-color: #333333;
         border: none
 }
 
 QFrame#SendCoinsEntry {
-        background-color: #444444;
+        background-color: #333333;
         border: none;
         min-width: 10em;
         padding: 6px;
@@ -120,12 +120,12 @@ QPushButton, QToolButton {
 }
 
 QPushButton:checked, QToolButton:checked {
-        color: #F43050;
+        color: #AEC6CF;
 }
 
 QPushButton:pressed, QToolButton:pressed {
-        border-color: #F43050;
-        color: #F43050;
+        border-color: #AEC6CF;
+        color: #AEC6CF;
 }
 
 QPushButton:disabled, QToolButton:disabled {
@@ -149,7 +149,7 @@ scrollAreaWidgetContents > QFrame {
 }
 
 QToolBar {
-        background: #444444;
+        background: #333333;
         border: 0px solid black;
         padding: 3px;
 }
@@ -159,16 +159,16 @@ QToolBar::handle {
 }
 
 QMenuBar {
-        background: #444444;
+        background: #333333;
 }
 
 QMenuBar::item {
-        background: #444444;
+        background: #333333;
         color: white;
 }
 
 QStatusBar {
-        background: #444444;
+        background: #333333;
 }
 
 QLineEdit {
@@ -240,7 +240,7 @@ QHeaderView::section:checked {
 }
 
 QTabWidget {
-        background: #444444;
+        background: #333333;
 }
 
 QTabWidget::pane {
@@ -249,7 +249,7 @@ QTabWidget::pane {
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
         border-top-right-radius: 8px;
-        background: #444444;
+        background: #333333;
 }
 
 QTabWidget::tab-bar {
