@@ -5,6 +5,7 @@
 #include "bitcoinrpc.h"
 #include "guiutil.h"
 #include "init.h"
+#include "version.h"
 
 #include <QTime>
 #include <QTimer>
@@ -206,6 +207,9 @@ RPCConsole::RPCConsole(QWidget *parent) :
 
     // set OpenSSL version label
     ui->openSSLVersion->setText(SSLeay_version(SSLEAY_VERSION));
+    // set PROTOCOL_VERSION version label
+    QString pVersion = QString::number(PROTOCOL_VERSION);
+    ui->protocol_version->setText(pVersion);
 
     startExecutor();
 

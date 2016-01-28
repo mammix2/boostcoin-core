@@ -14,7 +14,7 @@ class SendCoinsDialog;
 class SignVerifyMessageDialog;
 class Notificator;
 class RPCConsole;
-
+class StatisticsPage;
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -57,6 +57,7 @@ protected:
 private:
     ClientModel *clientModel;
     WalletModel *walletModel;
+    StatisticsPage *statisticsPage;
     QStackedWidget *centralWidget;
 
     OverviewPage *overviewPage;
@@ -74,6 +75,7 @@ private:
     QProgressBar *progressBar;
 
     QMenuBar *appMenuBar;
+    QAction *statisticsAction;
     QAction *blockAction;
     QAction *overviewAction;
     QAction *historyAction;
@@ -139,6 +141,8 @@ public slots:
 private slots:
     /** Switch to overview (home) page */
     void gotoOverviewPage();
+    /** Switch to statistics page*/
+    void gotoStatisticsPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
     /** Switch to address book page */

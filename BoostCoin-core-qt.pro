@@ -1,12 +1,13 @@
 # x13 version by Mammix2
+# BOST Version 2, includes 500k more coins. hard forked.
 
 
 TEMPLATE = app
 DEFINES += FN1 FN2
 FN1 = boostcoin-core
-FN2 = -qt
-VERSION = 4.2.0.0
-TARGET = $$FN1$$FN2
+FN2 = -qt-v
+VERSION = 4.3.0.2
+TARGET = $$FN1$$FN2$$VERSION
 INCLUDEPATH += src src/json \
     src/qt \
     src/tor
@@ -14,8 +15,10 @@ QT += core gui network
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
 CONFIG += thread
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-lessThan(QT_MAJOR_VERSION, 5): CONFIG += static
+
+lessThan(QT_MAJOR_VERSION, 5) {
+    CONFIG += static
+}
 QMAKE_CXXFLAGS = -fpermissive
 
 greaterThan(QT_MAJOR_VERSION, 4) {
@@ -415,6 +418,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/aboutdialog.h \
     src/qt/editaddressdialog.h \
     src/qt/bitcoinaddressvalidator.h \
+    src/qt/statisticspage.h \
     src/alert.h \
     src/addrman.h \
     src/base58.h \
@@ -521,6 +525,7 @@ SOURCES += src/qt/bitcoin.cpp \
     src/qt/aboutdialog.cpp \
     src/qt/editaddressdialog.cpp \
     src/qt/bitcoinaddressvalidator.cpp \
+    src/qt/statisticspage.cpp \
     src/qt/qvalidatedtextedit.cpp \
     src/alert.cpp \
     src/version.cpp \
@@ -600,6 +605,7 @@ FORMS += \
     src/qt/forms/askpassphrasedialog.ui \
     src/qt/forms/rpcconsole.ui \
     src/qt/forms/optionsdialog.ui \
+    src/qt/forms/statisticspage.ui \
 
 contains(USE_QRCODE, 1) {
 HEADERS += src/qt/qrcodedialog.h
@@ -698,7 +704,7 @@ macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhan
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit -framework CoreServices
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/bitcoin.icns
-macx:TARGET = $$FN1$$FN2
+macx:TARGET = $$FN1$$FN2$$VERSION
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread

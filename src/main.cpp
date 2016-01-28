@@ -55,12 +55,10 @@ static const int64_t nInterval = nTargetTimespan_legacy / nTargetSpacing;
 
 static const int64_t nTargetTimespan = 16 * 60;
 
-
-int64_t devCoin = 15 * COIN;
 int nCoinbaseMaturity = 100;
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
-
+int64_t devCoin;
 uint256 nBestChainTrust = 0;
 uint256 nBestInvalidTrust = 0;
 
@@ -994,11 +992,12 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 		}
 			else if (pindexBest->nHeight > 640337 && pindexBest->nHeight < P2_End)
 		{
-            int64_t nSubsidy = 15 * COIN;
+            int64_t nSubsidy = 0 * COIN;
 			if (fDebug && GetBoolArg("-printcreation"))
 			printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
 			return nSubsidy + nFees;
-		}		
+        }
+
     else
 	{
 		int64_t nSubsidy = 515 * COIN;
@@ -1016,7 +1015,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     if(pindexBest->nHeight < LAST_OLD_POS_BLOCK) {
         nSubsidy = nCoinAge * POS_STAKE_REWARD / 365 / COIN; // original PoS reward
     } else {
-        nSubsidy = nCoinAge * POS_STAKE_REWARD / 365; // PoS reward on V4 chain
+        nSubsidy = nCoinAge * POS_STAKE_REWARD / 365; // PoS reward on V2 chain
     }
 
 
@@ -1668,6 +1667,14 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
     if(IsProofOfWork())
     {
+
+        if (pindexBest->nHeight <= (!fTestNet ? P1_End : P1_End_TestNet)){
+            devCoin = 15 * COIN;
+        }
+        else {
+            devCoin = 0 * COIN;
+        }
+
         CBitcoinAddress address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
         CScript scriptPubKey;
         scriptPubKey.SetDestination(address.Get());
@@ -2630,7 +2637,7 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1400512373;
+        block.nTime    = txNew.nTime;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
         block.nNonce   = 5726282;
         if(fTestNet)

@@ -12,7 +12,6 @@
 #include "scrypt.h"
 #include "hashblock.h"
 #include "checkblocks.h"
-
 #include <list>
 
 class CWallet;
@@ -21,7 +20,6 @@ class CBlockIndex;
 class CKeyItem;
 class CReserveKey;
 class COutPoint;
-
 class CAddress;
 class CInv;
 class CRequestTracker;
@@ -35,11 +33,11 @@ static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
 static const unsigned int MAX_INV_SZ = 50000;
 static const int64_t MIN_TX_FEE = 10000;
 static const int64_t MIN_RELAY_TX_FEE = MIN_TX_FEE;
-static const int64_t MAX_MONEY = 40000000 * COIN;
+static const int64_t MAX_MONEY = 400000000 * COIN;
 static const int64 MIN_TXOUT_AMOUNT = MIN_TX_FEE;
 static const int64_t COIN_YEAR_REWARD = 1 * CENT; // 1% per year
 static const int64_t POS_STAKE_REWARD = 0.1 * COIN; // 10% annual interest
-static const int V4_CHAIN_PARAMS_TIME = 1450180800; // V4 chain switch
+static const int V2_CHAIN_PARAMS_TIME = 1453924800; // V4 chain switch, Wed, 27 Jan 2016 22:00:00 GMT
 
 #define FOUNDATION "BKqAh5ojyS7bkjaDHJEWXxMwKNUvUsNZak"
 #define FOUNDATION_TEST "myLSiixUQwdiGGvmSvZBNBHR7C8bmMkBdr"
@@ -56,7 +54,7 @@ static const int fHaveUPnP = false;
 
 // new boundaries in preparation for time drift change in future hard fork
 inline int64_t PastDrift(int64_t nTime)   {
-    if (nTime < V4_CHAIN_PARAMS_TIME){
+    if (nTime < V2_CHAIN_PARAMS_TIME){
         return nTime - 24 * 60 * 60;
         }
     else {
@@ -65,7 +63,7 @@ inline int64_t PastDrift(int64_t nTime)   {
 }
 
 inline int64_t FutureDrift(int64_t nTime) {
-    if (nTime < V4_CHAIN_PARAMS_TIME){
+    if (nTime < V2_CHAIN_PARAMS_TIME){
         return nTime + 24 * 60 * 60;
         }
     else {

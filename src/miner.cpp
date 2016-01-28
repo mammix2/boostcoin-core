@@ -7,6 +7,7 @@
 #include "txdb.h"
 #include "miner.h"
 #include "kernel.h"
+#include "pow_control.h"
 
 using namespace std;
 
@@ -361,6 +362,13 @@ CBlock* CreateNewBlock(CWallet* pwallet, bool fProofOfStake, int64_t* pFees)
 
         if (!fProofOfStake)
         {
+            if (pindexBest->nHeight <= (!fTestNet ? P1_End : P1_End_TestNet)){
+                devCoin = 15 * COIN;
+            }
+            else {
+                devCoin = 0 * COIN;
+            }
+
             pblock->vtx[0].vout[0].nValue = GetProofOfWorkReward(nFees) - devCoin;
             pblock->vtx[0].vout[1].nValue = devCoin;
         }

@@ -228,7 +228,10 @@ OBJS= \
 	obj/scrypt.o \
 	obj/scrypt-arm.o \
 	obj/scrypt-x86.o \
-	obj/scrypt-x86_64.o 
+	obj/scrypt-x86_64.o \
+	obj/json_spirit_reader.o \
+	obj/json_spirit_writer.o
+
 
 all: boostcoind
 
