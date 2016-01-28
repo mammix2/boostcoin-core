@@ -39,7 +39,7 @@ static const int64_t COIN_YEAR_REWARD = 1 * CENT; // 1% per year
 static const int64_t POS_STAKE_REWARD = 0.1 * COIN; // 10% annual interest
 static const int V2_CHAIN_PARAMS_TIME = 1453924800; // V4 chain switch, Wed, 27 Jan 2016 22:00:00 GMT
 
-#define FOUNDATION "BKqAh5ojyS7bkjaDHJEWXxMwKNUvUsNZak"
+#define FOUNDATION "BQBCiPR9XcZxghyvg567kmD34Z2Z9FHcQb"
 #define FOUNDATION_TEST "myLSiixUQwdiGGvmSvZBNBHR7C8bmMkBdr"
 
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
