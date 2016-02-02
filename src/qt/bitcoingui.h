@@ -70,6 +70,7 @@ private:
     QLabel *labelEncryptionIcon;
     QLabel *labelStakingIcon;
     QLabel *labelConnectionsIcon;
+    QLabel *labelOnionIcon;
     QLabel *labelBlocksIcon;
     QLabel *progressBarLabel;
     QProgressBar *progressBar;

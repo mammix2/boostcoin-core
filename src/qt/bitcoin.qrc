@@ -49,6 +49,7 @@
         <file alias="twitter">res/icons/twitter_32x32.png</file>
         <file alias="messaging">res/icons/message.png</file>
         <file alias="mixer">res/icons/arrow_mix_32x32_white.png</file>
+        <file alias="onion_small">res/icons/onion_logo_16x16.png</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="about">res/images/about.png</file>
