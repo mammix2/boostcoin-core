@@ -243,7 +243,7 @@ SOURCES += src/tor/anonymize.cpp \
     src/tor/transports.c \
     src/tor/util_codedigest.c \
 
-
+# Updated Tor sources, (Work in progress)
 #### tor sources
 #SOURCES +=    src/tor/anonymize.cpp \
 #    src/tor/address.c \

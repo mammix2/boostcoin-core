@@ -8,7 +8,7 @@
 #include "guiutil.h"
 #include "guiconstants.h"
 #include "util.h"
-
+#include "net.h"
 #include "init.h"
 #include "ui_interface.h"
 #include "qtipcserver.h"

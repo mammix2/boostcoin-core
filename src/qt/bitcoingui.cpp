@@ -28,6 +28,7 @@
 #include "rpcconsole.h"
 #include "wallet.h"
 #include "init.h"
+#include "net.h"
 
 #ifdef Q_OS_MAC
 #include "macdockiconhandler.h"
@@ -276,12 +277,6 @@ void BitcoinGUI::createActions()
     addressBookAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
     tabGroup->addAction(addressBookAction);
 
-    blockAction = new QAction(QIcon(":/icons/block"), tr("&Block Explorer"), this);
-    blockAction->setToolTip(tr("Explore the BlockChain"));
-    blockAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
-    blockAction->setCheckable(true);
-    tabGroup->addAction(blockAction);
-    connect(blockAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(gotoOverviewPage()));
     connect(statisticsAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));

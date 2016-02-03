@@ -37,7 +37,7 @@ static const int64_t MAX_MONEY = 400000000 * COIN;
 static const int64 MIN_TXOUT_AMOUNT = MIN_TX_FEE;
 static const int64_t COIN_YEAR_REWARD = 1 * CENT; // 1% per year
 static const int64_t POS_STAKE_REWARD = 0.1 * COIN; // 10% annual interest
-static const int V2_CHAIN_PARAMS_TIME = 1453924800; // V4 chain switch, Wed, 27 Jan 2016 22:00:00 GMT
+static const int V2_CHAIN_PARAMS_TIME = 1453924800; // V2 chain switch, Wed, 27 Jan 2016 22:00:00 GMT
 
 #define FOUNDATION "BKqAh5ojyS7bkjaDHJEWXxMwKNUvUsNZak"
 #define FOUNDATION_TEST "myLSiixUQwdiGGvmSvZBNBHR7C8bmMkBdr"
@@ -52,7 +52,6 @@ static const int fHaveUPnP = true;
 static const int fHaveUPnP = false;
 #endif
 
-// new boundaries in preparation for time drift change in future hard fork
 inline int64_t PastDrift(int64_t nTime)   {
     if (nTime < V2_CHAIN_PARAMS_TIME){
         return nTime - 24 * 60 * 60;

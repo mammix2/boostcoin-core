@@ -9,6 +9,7 @@
 #include "guiutil.h"
 #include "guiconstants.h"
 #include "askpassphrasedialog.h"
+#include "util.h"
 
 #include <QAbstractItemDelegate>
 #include <QPainter>

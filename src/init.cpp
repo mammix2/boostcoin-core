@@ -405,7 +405,6 @@ bool AppInit2()
         // when only connecting to trusted nodes, do not seed via DNS, Tor, or listen by default
         SoftSetBoolArg("-dnsseed", false);
         SoftSetBoolArg("-listen", false);
-        //SoftSetArg("-torproxy", 1);
     }
 
     if (mapArgs.count("-proxy")) {
