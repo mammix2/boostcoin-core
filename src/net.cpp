@@ -1191,12 +1191,18 @@ static const char *strDNSSeed[][2] = {
     {"node10.bost.link", "node10.bost.link"},
 	
 };
-// hidden service seeds
+// hidden service seeds, current base + future staking nodes
 static const char *strMainNetOnionSeed[][1] = {
     {"gjgbuc3l52fxea5o.onion"}, // node02
     {"5hrzeemkppcdalp3.onion"}, // node04
     {"uwbrmhzppueemse5.onion"}, // node03
     {"5kbw5bcuudj2s75s.onion"}, // node05
+    {"3kt3ypmt63v7fhwg.onion"}, //future node
+    {"bivpn37zx5g25u2g.onion"}, //future node
+    {"dg5moxtmks3auqc5.onion"}, //future node
+    {"o2jjy6kkavi7wbx3.onion"}, //future node
+    {"rzqujgnsnejxkk3e.onion"}, //future node
+    {"ylou7bnzivq2xgfc.onion"}, //future node
     {NULL}
 };
 
