@@ -6,7 +6,7 @@ TEMPLATE = app
 DEFINES += FN1 FN2
 FN1 = boostcoin-core
 FN2 = -qt-v
-VERSION = 4.4.0.0
+VERSION = 4.4.0.1
 TARGET = $$FN1$$FN2$$VERSION
 INCLUDEPATH += src src/json \
     src/qt \
@@ -348,7 +348,8 @@ SOURCES += src/tor/anonymize.cpp \
 #    src/tor/workqueue.c
 
 ##encryption + compression sources
-SOURCES +=  src/lz4/lz4.c
+SOURCES +=  src/lz4/lz4.c \
+    src/xxhash/xxhash.c
 
 NO_LEVELDB=1
 !contains(NO_LEVELDB, 1) {
