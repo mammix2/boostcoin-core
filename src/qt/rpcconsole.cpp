@@ -215,7 +215,7 @@ RPCConsole::RPCConsole(QWidget *parent) :
 
     clear();
 
-    int isfDark = GetArg("-torproxy", 0);
+    int isfDark = GetArg("-torproxy", 1);
 
     if (isfDark == 1) {
         ui->labelTorLogo->setEnabled(true);
