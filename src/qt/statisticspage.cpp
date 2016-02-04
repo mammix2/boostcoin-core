@@ -67,11 +67,11 @@ void StatisticsPage::updateStatistics()
 
     if (pindexBest->nHeight < (!fTestNet ? P2_End : P2_End_TestNet))
     {
-        phase = "Proof of Work";
+        phase = "Hybrid PoW + PoS";
     }
     else
     {
-        phase = "Proof of Stake";
+        phase = "Proof of Stake only";
     }
     QString subsidy = QString::number(nSubsidy, 'f', 6);
     QString hardness = QString::number(pHardness, 'f', 6);
