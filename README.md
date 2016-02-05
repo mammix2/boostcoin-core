@@ -1,8 +1,13 @@
+### BoostCoin core
 
-BoostCoin core
+## The first ever x13 PoW / PoS coin.
 
-Use this repo for the cut down version of the wallet.
 
-The first ever x13 PoW / PoS coin.
+# Important Info:
 
-Visit http://boostcoin.eu for more details, or visit the launch thread over at https://bitcointalk.org/index.php?topic=601965.0
+BoostCoin V2. Mandatory update for all users. Everyone must be using the new wallet to be able to send and receive coins.
+Any user who are using a wallet on block chain version 80001 or lower will be orphaned form the chain and any new TX form
+those wallets will be invalid.
+
+
+Visit https://bitcointalk.org/index.php?topic=601965.msg13783138#msg13783138 for more details
