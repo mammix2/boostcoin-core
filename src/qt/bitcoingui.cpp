@@ -11,6 +11,7 @@
 #include "signverifymessagedialog.h"
 #include "optionsdialog.h"
 #include "aboutdialog.h"
+#include "charitydialog.h"
 #include "clientmodel.h"
 #include "walletmodel.h"
 #include "editaddressdialog.h"
@@ -35,6 +36,7 @@
 #endif
 
 #include <QApplication>
+#include <QNetworkRequest>
 #include <QMainWindow>
 #include <QMenuBar>
 #include <QMenu>
@@ -308,6 +310,10 @@ void BitcoinGUI::createActions()
     aboutAction = new QAction(QIcon(":/icons/bitcoin"), tr("&About BoostCoin"), this);
     aboutAction->setToolTip(tr("Show information about BoostCoin"));
     aboutAction->setMenuRole(QAction::AboutRole);
+	charityAction = new QAction(QIcon(":/icons/bitcoin"), tr("&Stake For Charity"), this);
+    charityAction->setToolTip(tr("Enable Stake For Charity"));
+    charityAction->setMenuRole(QAction::AboutRole);
+
 #if QT_VERSION < 0x050000
     aboutQtAction = new QAction(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"), tr("About &Qt"), this);
 #else
@@ -340,6 +346,9 @@ void BitcoinGUI::createActions()
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
+	
+    connect(charityAction, SIGNAL(triggered()), this, SLOT(charityClicked()));
+	
     connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(optionsAction, SIGNAL(triggered()), this, SLOT(optionsClicked()));
     connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
@@ -389,6 +398,7 @@ void BitcoinGUI::createMenuBar()
     settings->addAction(changePassphraseAction);
     settings->addAction(unlockWalletAction);
     settings->addAction(lockWalletAction);
+    settings->addAction(charityAction);
     settings->addSeparator();
     settings->addAction(optionsAction);
 
@@ -410,7 +420,7 @@ void BitcoinGUI::createToolBars(QToolBar* toolbar)
     toolbar->addAction(addressBookAction);
 	toolbar->addAction(statisticsAction);
     toolbar->addAction(exportAction);
-
+    toolbar->addAction(charityAction);
 }
 
 void BitcoinGUI::setClientModel(ClientModel *clientModel)
@@ -545,6 +555,13 @@ void BitcoinGUI::optionsClicked()
 void BitcoinGUI::aboutClicked()
 {
     AboutDialog dlg;
+    dlg.setModel(clientModel);
+    dlg.exec();
+}
+
+void BitcoinGUI::charityClicked()
+{
+    charityDialog dlg;
     dlg.setModel(clientModel);
     dlg.exec();
 }

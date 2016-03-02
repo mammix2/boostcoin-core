@@ -976,35 +976,16 @@ uint256 WantedByOrphan(const CBlock* pblockOrphan)
 // miner's coin base reward
 int64_t GetProofOfWorkReward(int64_t nFees)
 {
-    if (pindexBest->nHeight == 1)
-      {
-			int64_t nSubsidy = 400000 * COIN;
-			if (fDebug && GetBoolArg("-printcreation"))
-			printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
-			return nSubsidy + nFees;
-		} 
-            else if (pindexBest->nHeight == 640400)
-		{
-            int64_t nSubsidy = 500000 * COIN;
-			if (fDebug && GetBoolArg("-printcreation"))
-			printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
-			return nSubsidy + nFees;
-		}
-			else if (pindexBest->nHeight > 640337 && pindexBest->nHeight < P2_End)
-		{
-            int64_t nSubsidy = 0 * COIN;
-			if (fDebug && GetBoolArg("-printcreation"))
-			printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
-			return nSubsidy + nFees;
-        }
-
-    else
-	{
-		int64_t nSubsidy = 515 * COIN;
-		if (fDebug && GetBoolArg("-printcreation"))
-		printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
-		return nSubsidy + nFees;
-	}
+    if (pindexBest->nHeight == 1){
+        int64_t nSubsidy = 400000 * COIN;
+        return nSubsidy + nFees;
+    } else if (pindexBest->nHeight > 640400) {
+        int64_t nSubsidy = 1.301 * COIN; // V2 PoW reward plus fees coverage, based on 2 minute blocks
+        return nSubsidy + nFees;
+    } else {
+        int64_t nSubsidy = 515 * COIN;
+        return nSubsidy + nFees;
+    }
 }
 
 // miner's coin stake reward based on coin age spent (coin-days)
@@ -1017,10 +998,6 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     } else {
         nSubsidy = nCoinAge * POS_STAKE_REWARD / 365; // PoS reward on V2 chain
     }
-
-
-    if (fDebug && GetBoolArg("-printcreation"))
-        printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
 
     return nSubsidy + nFees;
 }
@@ -1126,6 +1103,9 @@ unsigned int static GetNextWorkRequired_legacy(const CBlockIndex* pindexLast)
 
 static unsigned int GetNextTargetRequired_DGW(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
+    if (pindexBest->nHeight > (fTestNet ? 100 : 640450)) {
+        nTargetSpacing = 2 * 60;
+	}
     CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : bnProofOfWorkLimit;
 
     if (pindexLast == NULL)
@@ -1670,10 +1650,9 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
         if (pindexBest->nHeight <= (!fTestNet ? P1_End : P1_End_TestNet)){
             devCoin = 15 * COIN;
-        }
-        else {
-            devCoin = 0 * COIN;
-        }
+        } else {
+			devCoin = 1.3 * COIN;
+		}
 
         CBitcoinAddress address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
         CScript scriptPubKey;
@@ -1681,11 +1660,12 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         if (vtx[0].vout[1].scriptPubKey != scriptPubKey)
             return error("ConnectBlock() : coinbase does not pay to the dev address)");
         if (vtx[0].vout[1].nValue < devCoin)
-            return error("ConnectBlock() : coinbase does not pay enough to dev addresss");
+            return error("ConnectBlock() : coinbase does not pay enough to dev address");
     }
 
     if (IsProofOfStake())
     {
+
         // boostcoin: coin stake tx earns reward instead of paying fee
         uint64_t nCoinAge;
         if (!vtx[1].GetCoinAge(txdb, nCoinAge))
@@ -2438,6 +2418,10 @@ bool ProcessBlock(CNode* pfrom, CBlock* pblock)
 
     printf("ProcessBlock: ACCEPTED\n");
 
+	// If turned on stakeforcharity, send a portion of stake reward to savings account address
+	if (pwalletMain->fStakeForCharity)
+		if (!pwalletMain->StakeForCharity() )
+			printf("ERROR While trying to send portion of stake reward to savings account");
     // boostcoin: if responsible for sync-checkpoint send it
     if (pfrom && !CSyncCheckpoint::strMasterPrivKey.empty())
         Checkpoints::SendSyncCheckpoint(Checkpoints::AutoSelectSyncCheckpoint());
