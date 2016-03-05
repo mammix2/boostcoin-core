@@ -48,7 +48,7 @@ void StatisticsPage::updateStatistics()
     int pPawrate = GetPoWMHashPS();
     double pPawrate2 = 0.000;
     int nHeight = pindexBest->nHeight;
-    double nSubsidy = 515;
+    int nSubsidy = 1.3;
     uint64_t nMinWeight = 0, nMaxWeight = 0, nWeight = 0;
     pwalletMain->GetStakeWeight(*pwalletMain, nMinWeight, nMaxWeight, nWeight);
     uint64_t nNetworkWeight = GetPoSKernelPS();
@@ -59,11 +59,6 @@ void StatisticsPage::updateStatistics()
     QString stakemin = QString::number(nMinWeight);
     QString stakemax = QString::number(nNetworkWeight);
     QString phase = "";
-    QString LastPoWBlock = QString::number((!fTestNet ? P2_End : P2_End_TestNet));
-
-//    ui->labelPhasePoW->setText("PoW = Block 0 - " + LastPoWBlock);
-//    ui->labelPhasePoS->setText("PoS = Block " + LastPoWBlock + " - onwards");
-
 
     if (pindexBest->nHeight < (!fTestNet ? P2_End : P2_End_TestNet))
     {
@@ -71,14 +66,13 @@ void StatisticsPage::updateStatistics()
     }
     else
     {
-        phase = "Proof of Stake only";
+        phase = "Proof of Stake";
     }
-    QString subsidy = QString::number(nSubsidy, 'f', 6);
-    QString hardness = QString::number(pHardness, 'f', 6);
-    QString hardness2 = QString::number(pHardness2, 'f', 6);
+    QString subsidy = QString::number(nSubsidy , 'f', 8);
+    QString hardness = QString::number(pHardness, 'f', 8);
+    QString hardness2 = QString::number(pHardness2, 'f', 8);
     QString pawrate = QString::number(pPawrate2, 'f', 3);
     QString Qlpawrate = model->getLastBlockDate().toString();
-
     QString QPeers = QString::number(peers);
     QString qVolume = QLocale(QLocale::English).toString(volume);
 
@@ -86,27 +80,27 @@ void StatisticsPage::updateStatistics()
     {
         ui->heightBox->setText("<b><font color=\"light blue\">" + height + "</font></b>");
     } else {
-    ui->heightBox->setText(height);
+        ui->heightBox->setText(height);
     }
 
     if(0 > stakeminPrevious)
     {
         ui->minBox->setText("<b><font color=\"light blue\">" + stakemin + "</font></b>");
     } else {
-    ui->minBox->setText(stakemin);
+        ui->minBox->setText(stakemin);
     }
     if(0 > stakemaxPrevious)
     {
         ui->maxBox->setText("<b><font color=\"light blue\">" + stakemax + "</font></b>");
     } else {
-    ui->maxBox->setText(stakemax);
+        ui->maxBox->setText(stakemax);
     }
 
     if(phase != stakecPrevious)
     {
         ui->cBox->setText("<b><font color=\"light blue\">" + phase + "</font></b>");
     } else {
-    ui->cBox->setText(phase);
+        ui->cBox->setText(phase);
     }
 
     
@@ -114,7 +108,7 @@ void StatisticsPage::updateStatistics()
     {
         ui->rewardBox->setText("<b><font color=\"red\">" + subsidy + "</font></b>");
     } else {
-    ui->rewardBox->setText(subsidy);
+        ui->rewardBox->setText(subsidy);
     }
     
     if(pHardness > hardnessPrevious)
@@ -148,7 +142,7 @@ void StatisticsPage::updateStatistics()
     {
         ui->localBox->setText("<b><font color=\"light blue\">" + Qlpawrate + "</font></b>");
     } else {
-    ui->localBox->setText(Qlpawrate);
+        ui->localBox->setText(Qlpawrate);
     }
     
     if(peers > connectionPrevious)

@@ -6,66 +6,91 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>331</width>
-    <height>413</height>
+    <width>543</width>
+    <height>363</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>StakeBoost Donations</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>-90</x>
-     <y>260</y>
-     <width>341</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="charityPercentEdit">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>200</y>
-     <width>311</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>Enter % to Send (1-50)</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="charityAddressEdit">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>230</y>
-     <width>231</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>7</pointsize>
-    </font>
-   </property>
-   <property name="placeholderText">
-    <string>Enter Address to Send to</string>
-   </property>
-  </widget>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+        color: white;
+        background-color: #333333;
+        border: none;
+}
+
+QLabel {
+        background-color: transparent;
+        color: white;
+        font-weight: normal
+}
+
+QLabel[openExternalLinks=true], QHeaderView {
+        color: #aaaaaa
+}
+
+QLabel[openExternalLinks=false] {
+        color: white;
+        font-weight: normal
+}
+
+QPushButton, QToolButton {
+        border: 4px solid #000000;
+        border-radius: 4px;
+        background-color: #000000;
+        color: white;
+        padding: 4px;
+        margin: 4px;
+}
+
+QPushButton:checked, QToolButton:checked {
+        color: #AEC6CF;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+        border-color: #AEC6CF;
+        color: #AEC6CF;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+        color: #444;
+        background-color: #222222;
+}
+
+QLineEdit {
+        border-radius: 6px;
+        border-width: 1px;
+        border-color: #222222;
+        padding: 8px;
+        background-color: #000000;
+        color: white;
+}
+
+QLineEdit:disabled {
+        border-radius: 6px;
+        border-width: 1px;
+        border-color: #222222;
+        padding: 8px;
+        background-color: #262626;
+        color: white;
+}
+
+QSpinBox {
+        border-radius: 6px;
+        border-width: 1;
+        border-style: 222222;
+        padding: 2px;
+        background-color: #000000;
+        color: white;
+}</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>0</x>
      <y>10</y>
-     <width>251</width>
+     <width>271</width>
      <height>31</height>
     </rect>
    </property>
@@ -75,7 +100,7 @@
     </font>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;StakeBoost Donations&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stake Savings or Donations&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="scaledContents">
     <bool>false</bool>
@@ -88,16 +113,16 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>50</y>
-     <width>281</width>
-     <height>151</height>
+     <y>60</y>
+     <width>451</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="lineWidth">
     <number>1</number>
    </property>
    <property name="text">
-    <string>StakeBoost Donations allow you to automatically send up to 50% of your Stake to the StakeBoost donation address.  StakeBoost Donations require that the Staked Block recieve 80 confirmations before the transaction is automatically sent. Stake For Charity is not stored in long term memory and must be set each time the wallet is started. </string>
+    <string>Stake Saving or Donations allow you to automatically send up to 50% of your Stake to the address you specify here.  Stake Saving or Donations require that the Staked Block recieve 110 confirmations before the transaction is automatically sent. </string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -106,13 +131,102 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>335</x>
+     <y>310</y>
+     <width>191</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="formLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>160</y>
+     <width>521</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout_2">
+    <property name="horizontalSpacing">
+     <number>8</number>
+    </property>
+    <property name="verticalSpacing">
+     <number>14</number>
+    </property>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Address to send to</string>
+      </property>
+      <property name="indent">
+       <number>4</number>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="charityAddressEdit">
+      <property name="font">
+       <font>
+        <pointsize>7</pointsize>
+       </font>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Percentage to send</string>
+      </property>
+      <property name="indent">
+       <number>4</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QSpinBox" name="charityPercentEdit">
+      <property name="maximum">
+       <number>50</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>461</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>NOTE: The settings on this form are not stored in long term memory and must be set each time the wallet is started</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>300</y>
-     <width>91</width>
-     <height>23</height>
+     <x>10</x>
+     <y>310</y>
+     <width>141</width>
+     <height>37</height>
     </rect>
    </property>
    <property name="text">

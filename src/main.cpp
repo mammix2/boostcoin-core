@@ -979,8 +979,11 @@ int64_t GetProofOfWorkReward(int64_t nFees)
     if (pindexBest->nHeight == 1){
         int64_t nSubsidy = 400000 * COIN;
         return nSubsidy + nFees;
-    } else if (pindexBest->nHeight > 640400) {
+    } else if (pindexBest->nHeight > 640400 && pindexBest->nHeight <= 641250 ) {
         int64_t nSubsidy = 1.301 * COIN; // V2 PoW reward plus fees coverage, based on 2 minute blocks
+        return nSubsidy + nFees;
+    } else if (pindexBest->nHeight > 641250) {
+        int64_t nSubsidy = 1.31 * COIN; // PoW adjustment to cover extra fees if needed
         return nSubsidy + nFees;
     } else {
         int64_t nSubsidy = 515 * COIN;
