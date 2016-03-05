@@ -79,7 +79,7 @@ void charityDialog::on_buttonBox_accepted()
                    pwalletMain->nStakeForCharityPercent = nCharityPercent;
                    pwalletMain->fStakeForCharity = true;
 
-                   msgBox.setText("Stake For Charity Set");
+                   msgBox.setText("Split Stake Set");
                    msgBox.exec();
 }
 
@@ -95,7 +95,7 @@ void charityDialog::on_pushButton_clicked()
     pwalletMain->StakeForCharityAddress = "";
     pwalletMain->nStakeForCharityPercent = 0;
 
-    msgBox.setText("Stake For Charity Disabled");
+    msgBox.setText("Split Stake Disabled");
     msgBox.exec();
 }
 

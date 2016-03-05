@@ -86,7 +86,7 @@ private:
     QAction *signMessageAction;
     QAction *verifyMessageAction;
     QAction *aboutAction;
-	QAction *charityAction;
+	QAction *SplitStakeAction;
     QAction *receiveCoinsAction;
     QAction *optionsAction;
     QAction *toggleHideAction;
@@ -163,7 +163,7 @@ private slots:
     void optionsClicked();
     /** Show about dialog */
     void aboutClicked();
-	/** Show Stake For Charity Dialog */
+	/** Show Split Stake Dialog */
     void charityClicked();
 #ifndef Q_OS_MAC
     /** Handle tray icon clicked */

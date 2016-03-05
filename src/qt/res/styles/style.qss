@@ -115,7 +115,7 @@ QPushButton, QToolButton {
         border-radius: 7px;
         background-color: #000000;
         color: white;
-        padding: 6px;
+        padding: 3px;
         margin: 6px;
 }
 

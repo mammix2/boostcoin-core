@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>StakeBoost Donations</string>
+   <string>Split Stake</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog {
@@ -90,7 +90,7 @@ QSpinBox {
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>271</width>
+     <width>121</width>
      <height>31</height>
     </rect>
    </property>
@@ -100,7 +100,7 @@ QSpinBox {
     </font>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stake Savings or Donations&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Split Stake&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="scaledContents">
     <bool>false</bool>
@@ -122,7 +122,7 @@ QSpinBox {
     <number>1</number>
    </property>
    <property name="text">
-    <string>Stake Saving or Donations allow you to automatically send up to 50% of your Stake to the address you specify here.  Stake Saving or Donations require that the Staked Block recieve 110 confirmations before the transaction is automatically sent. </string>
+    <string>Split Stake Savings allows you to split your stake reward and automatically send up to 50% of your Stake to the address you specify here. Split Stake requires that the Staked Block recieve 110 confirmations before the transaction is automatically sent.</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -197,6 +197,12 @@ QSpinBox {
     </item>
     <item row="2" column="1">
      <widget class="QSpinBox" name="charityPercentEdit">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>31</height>
+       </size>
+      </property>
       <property name="maximum">
        <number>50</number>
       </property>
@@ -214,7 +220,7 @@ QSpinBox {
     </rect>
    </property>
    <property name="text">
-    <string>NOTE: The settings on this form are not stored in long term memory and must be set each time the wallet is started</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;NOTE: The settings on this form are not stored in long term memory and must be set each time the wallet is started&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>

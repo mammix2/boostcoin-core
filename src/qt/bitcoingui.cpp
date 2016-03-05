@@ -88,13 +88,13 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
 {
 
 #ifdef Q_OS_MAC
-    resize(960, 610);
+    resize(1025, 610);
     setWindowTitle(tr("BoostCoin Core wallet - Mac"));
 #elif _WIN32
-    resize(880, 600);
+    resize(945, 600);
     setWindowTitle(tr("BoostCoin Core wallet - Windows"));
 #else
-    resize(1020, 650);
+    resize(1088, 650);
     setWindowTitle(tr("BoostCoin Core wallet - Linux"));
 #endif
 
@@ -310,9 +310,9 @@ void BitcoinGUI::createActions()
     aboutAction = new QAction(QIcon(":/icons/bitcoin"), tr("&About BoostCoin"), this);
     aboutAction->setToolTip(tr("Show information about BoostCoin"));
     aboutAction->setMenuRole(QAction::AboutRole);
-	charityAction = new QAction(QIcon(":/icons/bitcoin"), tr("&Stake For Charity"), this);
-    charityAction->setToolTip(tr("Enable Stake For Charity"));
-    charityAction->setMenuRole(QAction::AboutRole);
+    SplitStakeAction = new QAction(QIcon(":/icons/tx_inout"), tr("&Split Stake"), this);
+    SplitStakeAction->setToolTip(tr("Enable Split Stake"));
+    SplitStakeAction->setMenuRole(QAction::AboutRole);
 
 #if QT_VERSION < 0x050000
     aboutQtAction = new QAction(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"), tr("About &Qt"), this);
@@ -346,9 +346,7 @@ void BitcoinGUI::createActions()
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
-	
-    connect(charityAction, SIGNAL(triggered()), this, SLOT(charityClicked()));
-	
+    connect(SplitStakeAction, SIGNAL(triggered()), this, SLOT(charityClicked()));
     connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(optionsAction, SIGNAL(triggered()), this, SLOT(optionsClicked()));
     connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
@@ -398,7 +396,8 @@ void BitcoinGUI::createMenuBar()
     settings->addAction(changePassphraseAction);
     settings->addAction(unlockWalletAction);
     settings->addAction(lockWalletAction);
-    settings->addAction(charityAction);
+    settings->addSeparator();
+    settings->addAction(SplitStakeAction);
     settings->addSeparator();
     settings->addAction(optionsAction);
 
@@ -419,8 +418,9 @@ void BitcoinGUI::createToolBars(QToolBar* toolbar)
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
 	toolbar->addAction(statisticsAction);
+    toolbar->addAction(SplitStakeAction);
     toolbar->addAction(exportAction);
-    toolbar->addAction(charityAction);
+
 }
 
 void BitcoinGUI::setClientModel(ClientModel *clientModel)
