@@ -48,7 +48,6 @@ void StatisticsPage::updateStatistics()
     int pPawrate = GetPoWMHashPS();
     double pPawrate2 = 0.000;
     int nHeight = pindexBest->nHeight;
-    int nSubsidy = 1.3;
     uint64_t nMinWeight = 0, nMaxWeight = 0, nWeight = 0;
     pwalletMain->GetStakeWeight(*pwalletMain, nMinWeight, nMaxWeight, nWeight);
     uint64_t nNetworkWeight = GetPoSKernelPS();
@@ -68,7 +67,7 @@ void StatisticsPage::updateStatistics()
     {
         phase = "Proof of Stake";
     }
-    QString subsidy = QString::number(nSubsidy , 'f', 8);
+
     QString hardness = QString::number(pHardness, 'f', 8);
     QString hardness2 = QString::number(pHardness2, 'f', 8);
     QString pawrate = QString::number(pPawrate2, 'f', 3);
@@ -101,14 +100,6 @@ void StatisticsPage::updateStatistics()
         ui->cBox->setText("<b><font color=\"light blue\">" + phase + "</font></b>");
     } else {
         ui->cBox->setText(phase);
-    }
-
-    
-    if(nSubsidy < rewardPrevious)
-    {
-        ui->rewardBox->setText("<b><font color=\"red\">" + subsidy + "</font></b>");
-    } else {
-        ui->rewardBox->setText(subsidy);
     }
     
     if(pHardness > hardnessPrevious)
@@ -162,16 +153,15 @@ void StatisticsPage::updateStatistics()
     } else {
         ui->volumeBox->setText(qVolume + " BOST");
     }
-    updatePrevious(nHeight, nMinWeight, nNetworkWeight, phase, nSubsidy, pHardness, pHardness2, pPawrate2, Qlpawrate, peers, volume);
+    updatePrevious(nHeight, nMinWeight, nNetworkWeight, phase, pHardness, pHardness2, pPawrate2, Qlpawrate, peers, volume);
 }
 
-void StatisticsPage::updatePrevious(int nHeight, int nMinWeight, int nNetworkWeight, QString phase, double nSubsidy, double pHardness, double pHardness2, double pPawrate2, QString Qlpawrate, int peers, int volume)
+void StatisticsPage::updatePrevious(int nHeight, int nMinWeight, int nNetworkWeight, QString phase, double pHardness, double pHardness2, double pPawrate2, QString Qlpawrate, int peers, int volume)
 {
     heightPrevious = nHeight;
     stakeminPrevious = nMinWeight;
     stakemaxPrevious = nNetworkWeight;
     stakecPrevious = phase;
-    rewardPrevious = nSubsidy;
     hardnessPrevious = pHardness;
     hardnessPrevious2 = pHardness2;
     netPawratePrevious = pPawrate2;

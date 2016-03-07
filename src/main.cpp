@@ -1651,11 +1651,13 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
     if(IsProofOfWork())
     {
 
-        if (pindexBest->nHeight <= (!fTestNet ? P1_End : P1_End_TestNet)){
+        if (pindexBest->nHeight <= 43200){
             devCoin = 15 * COIN;
-        } else {
-			devCoin = 1.3 * COIN;
-		}
+        } else if (pindexBest->nHeight > 43200 && pindexBest->nHeight <= 640398){
+            devCoin = 0 * COIN;
+        } else if (pindexBest->nHeight > 640398){
+            devCoin = 1.3 * COIN;
+        }
 
         CBitcoinAddress address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
         CScript scriptPubKey;

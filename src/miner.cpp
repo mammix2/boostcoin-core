@@ -362,10 +362,11 @@ CBlock* CreateNewBlock(CWallet* pwallet, bool fProofOfStake, int64_t* pFees)
 
         if (!fProofOfStake)
         {
-            if (pindexBest->nHeight <= (!fTestNet ? P1_End : P1_End_TestNet)){
+            if (pindexBest->nHeight <= 43200){
                 devCoin = 15 * COIN;
-            }
-            else {
+            } else if (pindexBest->nHeight > 43200 && pindexBest->nHeight <= 640398){
+                devCoin = 0 * COIN;
+            } else if (pindexBest->nHeight > 640398){
                 devCoin = 1.3 * COIN;
             }
 
