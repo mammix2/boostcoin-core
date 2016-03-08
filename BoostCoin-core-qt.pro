@@ -1,5 +1,5 @@
 # x13 version by Mammix2
-# BOST Version 2, includes 500k more coins. hard forked.
+# BOST Version 2, hard forked.
 
 
 TEMPLATE = app
