@@ -9,7 +9,7 @@ BoostCoin V2. Mandatory update for all users. Everyone must be using the new wal
 Any users who are running a wallet on block chain protocol version lower than 80011 will be disconnected and orphaned from the chain, any new TX from
 those wallets will be invalid.
 
-##Please ensure you update to this source code asap.
+###Please ensure you update to this source code asap.
 
 --------------------------------
 
@@ -24,4 +24,4 @@ BoostCoin V2。强制更新所有用户。每个人都必须使用新的钱包�
 谁是上运行块链协议版本的电子钱包的用户低于80011将被断开，从链，从任何新的TX孤立
 这些钱包将是无效的。
 
-##，请确保您更新到这个源代码尽快。
+###请确保您更新到这个源代码尽快。
