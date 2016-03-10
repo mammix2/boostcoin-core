@@ -88,7 +88,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
 {
 
 #ifdef Q_OS_MAC
-    resize(1035, 610);
+    resize(1040, 610);
     setWindowTitle(tr("BoostCoin Core wallet - Mac"));
 #elif _WIN32
     resize(945, 600);
