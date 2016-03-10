@@ -157,6 +157,9 @@ QSpinBox {
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout_2">
+    <property name="fieldGrowthPolicy">
+     <enum>QFormLayout::ExpandingFieldsGrow</enum>
+    </property>
     <property name="horizontalSpacing">
      <number>8</number>
     </property>
