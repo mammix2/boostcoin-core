@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
-    <height>363</height>
+    <width>613</width>
+    <height>412</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -114,7 +114,7 @@ QSpinBox {
     <rect>
      <x>10</x>
      <y>60</y>
-     <width>451</width>
+     <width>571</width>
      <height>61</height>
     </rect>
    </property>
@@ -134,8 +134,8 @@ QSpinBox {
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>335</x>
-     <y>310</y>
+     <x>410</x>
+     <y>360</y>
      <width>191</width>
      <height>41</height>
     </rect>
@@ -151,8 +151,8 @@ QSpinBox {
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>160</y>
-     <width>521</width>
+     <y>210</y>
+     <width>581</width>
      <height>121</height>
     </rect>
    </property>
@@ -214,8 +214,8 @@ QSpinBox {
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>110</y>
-     <width>461</width>
+     <y>130</y>
+     <width>561</width>
      <height>31</height>
     </rect>
    </property>
@@ -230,7 +230,7 @@ QSpinBox {
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>310</y>
+     <y>360</y>
      <width>141</width>
      <height>37</height>
     </rect>
