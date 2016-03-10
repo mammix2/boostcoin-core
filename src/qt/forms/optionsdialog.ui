@@ -14,7 +14,16 @@
    <string>Options</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog {
+   <string notr="true">QSpinBox, QSpinBox#reserveBalance  {
+        border-radius: 2px;
+        border-width: 0;
+        border-style: none;
+        padding: 4px;
+        background-color: #111;
+        color: white;
+}
+
+QDialog {
         color: white;
         background-color: #333333;
         border: none;
