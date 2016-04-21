@@ -37,7 +37,8 @@ static const int64_t MAX_MONEY = 400000000 * COIN;
 static const int64 MIN_TXOUT_AMOUNT = MIN_TX_FEE;
 static const int64_t COIN_YEAR_REWARD = 1 * CENT; // 1% per year
 static const int64_t POS_STAKE_REWARD = 0.1 * COIN; // 10% annual interest
-static const int V2_CHAIN_PARAMS_TIME = 1457136000; // V2 chain switch, Sat, 05 Mar 2016 00:00:00 GMT
+static const int nTimeDriftCondition1 = 1457136000; // Sat, 05 Mar 2016 00:00:00 GMT
+static const int nTimeDriftCondition2 = 1461873600; // Thu, 28 Apr 2016 20:00:00 GMT
 
 #define FOUNDATION "BKqAh5ojyS7bkjaDHJEWXxMwKNUvUsNZak"
 #define FOUNDATION_TEST "myLSiixUQwdiGGvmSvZBNBHR7C8bmMkBdr"
@@ -52,22 +53,24 @@ static const int fHaveUPnP = true;
 static const int fHaveUPnP = false;
 #endif
 
-inline int64_t PastDrift(int64_t nTime)   {
-    if (nTime < V2_CHAIN_PARAMS_TIME){
+inline int64_t PastDrift(int64_t nTime){
+    if (nTime >= nTimeDriftCondition1 && nTime < nTimeDriftCondition2){
+        return nTime - 10 * 60;
+    } else if (nTime >= nTimeDriftCondition2){
+        return nTime - 2 * 60 * 60;
+    } else if (nTime < nTimeDriftCondition1){
         return nTime - 24 * 60 * 60;
-        }
-    else {
-        return nTime - 10 * 60; // New time drift maximum
-        }
+    }
 }
 
-inline int64_t FutureDrift(int64_t nTime) {
-    if (nTime < V2_CHAIN_PARAMS_TIME){
+inline int64_t FutureDrift(int64_t nTime){
+    if (nTime >= nTimeDriftCondition1 && nTime < nTimeDriftCondition2){
+        return nTime + 10 * 60;
+    } else if (nTime >= nTimeDriftCondition2){
+        return nTime + 2 * 60 * 60;
+    } else if (nTime < nTimeDriftCondition1){
         return nTime + 24 * 60 * 60;
-        }
-    else {
-        return nTime + 10 * 60; // New time drift maximum
-        }
+    }
 }
 
 extern int64_t devCoin;
