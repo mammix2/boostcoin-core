@@ -58,7 +58,7 @@ inline int64_t PastDrift(int64_t nTime){
         return nTime - 10 * 60;
     } else if (nTime >= nTimeDriftCondition2){
         return nTime - 2 * 60 * 60;
-    } else if (nTime < nTimeDriftCondition1){
+    } else {
         return nTime - 24 * 60 * 60;
     }
 }
@@ -68,7 +68,7 @@ inline int64_t FutureDrift(int64_t nTime){
         return nTime + 10 * 60;
     } else if (nTime >= nTimeDriftCondition2){
         return nTime + 2 * 60 * 60;
-    } else if (nTime < nTimeDriftCondition1){
+    } else {
         return nTime + 24 * 60 * 60;
     }
 }
