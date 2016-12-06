@@ -5,8 +5,8 @@
 TEMPLATE = app
 DEFINES += FN1 FN2
 FN1 = boostcoin-core
-FN2 = -qt-v
-VERSION = 4.4.2.1
+FN2 = -qt-win-v
+VERSION = 4.4.5.0
 TARGET = $$FN1$$FN2$$VERSION
 INCLUDEPATH += src src/json \
     src/qt \
@@ -46,8 +46,9 @@ win32 {
     OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1l
     MINIUPNPC_INCLUDE_PATH=C:/deps/
     MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
-    QRENCODE_INCLUDE_PATH=C:/deps/qrcode-win32-3.1.1/include
-    QRENCODE_LIB_PATH=C:/deps/qrcode-win32-3.1.1/dll
+    QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.4
+    QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.4/.libs
+
 }
 
 # for boost 1.37, add -mt to the boost libraries
