@@ -7,7 +7,7 @@ DEFINES += FN1 FN2
 FN1 = boostcoin-core
 win32:FN2 = -qt-win-v
 macx:FN2 = -qt-macos-v
-VERSION = 4.4.5.0
+VERSION = 4.4.6.0
 TARGET = $$FN1$$FN2$$VERSION
 INCLUDEPATH += src src/json \
     src/qt \
