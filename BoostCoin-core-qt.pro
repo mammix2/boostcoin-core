@@ -3,12 +3,7 @@
 
 
 TEMPLATE = app
-DEFINES += FN1 FN2
-FN1 = boostcoin-core
-win32:FN2 = -qt-win-v
-macx:FN2 = -qt-macos-v
-VERSION = 4.4.6.0
-TARGET = $$FN1$$FN2$$VERSION
+VERSION = 4.4.7.0
 INCLUDEPATH += src src/json \
     src/qt \
     src/tor
@@ -707,7 +702,6 @@ macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhan
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit -framework CoreServices
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/bitcoin.icns
-macx:TARGET = $$FN1$$FN2$$VERSION
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread
