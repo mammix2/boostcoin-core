@@ -20,7 +20,7 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
     model(0),
     mapper(0),
     fRestartWarningDisplayed_Proxy(false),
-    fRestartWarningDisplayed_fDark(false),
+    fRestartWarningDisplayed_fTor(false),
     fRestartWarningDisplayed_Lang(false),
     fProxyIpValid(true)
 {
@@ -44,16 +44,16 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
     connect(ui->connectSocks, SIGNAL(toggled(bool)), ui->proxyPort, SLOT(setEnabled(bool)));
     connect(ui->connectSocks, SIGNAL(toggled(bool)), ui->socksVersion, SLOT(setEnabled(bool)));
     connect(ui->connectSocks, SIGNAL(clicked(bool)), this, SLOT(showRestartWarning_Proxy()));
-
-    connect(ui->connectTorProxy, SIGNAL(clicked(bool)), this, SLOT(showRestartWarning_fDark()));
+    connect(ui->connectTorProxy, SIGNAL(clicked(bool)), this, SLOT(showRestartWarning_fTor()));
 
     ui->proxyIp->installEventFilter(this);
 
-    if (fDarkEnabled == 1 ) {
+    if (fTorEnabled == 1 ) {
         ui->connectSocks->setEnabled(false);
         ui->proxyIp->setEnabled(false);
         ui->proxyPort->setEnabled(false);
         ui->socksVersion->setEnabled(false);
+        ui->connectTorProxy->setChecked(true);
     }
 
     /* Window elements init */
@@ -217,9 +217,9 @@ void OptionsDialog::showRestartWarning_Proxy()
     }
 }
 
-void OptionsDialog::showRestartWarning_fDark()
+void OptionsDialog::showRestartWarning_fTor()
 {
-    if(!fRestartWarningDisplayed_fDark)
+    if(!fRestartWarningDisplayed_fTor)
     {
         QMessageBox::warning(this, tr("Warning"), tr("This setting will take effect after restarting BoostCoin."), QMessageBox::Ok);
         fRestartWarningDisplayed_fDark = true;
