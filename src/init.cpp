@@ -588,9 +588,9 @@ bool AppInit2()
     if (nSocksVersion != 4 && nSocksVersion != 5)
         return InitError(strprintf(_("Unknown -socks proxy version requested: %i"), nSocksVersion));
 
-    int isfDark = GetArg("-torproxy", 1);
+    int isfTor = GetArg("-torproxy", 1);
 
-    if (isfDark == 1)
+    if (isfTor == 1)
     {
         std::set<enum Network> nets;
         nets.insert(NET_TOR);
@@ -666,7 +666,7 @@ bool AppInit2()
     fNoListen = !GetBoolArg("-listen", true);
     fDiscover = GetBoolArg("-discover", true);
     fNameLookup = GetBoolArg("-dns", true);
-    fDarkEnabled = GetArg("-torproxy", 1);
+    fTorEnabled = GetArg("-torproxy", 1);
 #ifdef USE_UPNP
     fUseUPnP = GetBoolArg("-upnp", USE_UPNP);
 #endif
@@ -693,7 +693,7 @@ bool AppInit2()
                 fBound |= Bind(CService(inaddr_any, GetListenPort()), !fBound);
             }
 
-            if (isfDark == 1)
+            if (isfTor == 1)
             {
                 CService addrBind;
 
@@ -707,7 +707,7 @@ bool AppInit2()
             return InitError(_("Failed to listen on any port. Use -listen=0 if you want this."));
     }
 
-    if (isfDark == 1)
+    if (isfTor == 1)
     {
         if (!NewThread(StartTor, NULL))
                 InitError(_("Error: could not start tor node"));
@@ -728,7 +728,7 @@ bool AppInit2()
         }
     }
 
-    if (isfDark == 1)
+    if (isfTor == 1)
     {
         string automatic_onion;
         filesystem::path const hostname_path = GetDefaultDataDir() / "onion" / "hostname";

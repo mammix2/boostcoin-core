@@ -222,7 +222,7 @@ void OptionsDialog::showRestartWarning_fTor()
     if(!fRestartWarningDisplayed_fTor)
     {
         QMessageBox::warning(this, tr("Warning"), tr("This setting will take effect after restarting BoostCoin."), QMessageBox::Ok);
-        fRestartWarningDisplayed_fDark = true;
+        fRestartWarningDisplayed_fTor = true;
     }
 }
 
