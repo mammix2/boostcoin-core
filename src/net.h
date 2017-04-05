@@ -115,7 +115,7 @@ enum threadId
 extern bool fClient;
 extern bool fDiscover;
 extern bool fUseUPnP;
-extern bool fTorEnabled;
+extern int fTorEnabled;
 extern uint64_t nLocalServices;
 extern uint64_t nLocalHostNonce;
 extern CAddress addrSeenByPeer;
@@ -203,7 +203,7 @@ public:
     std::set<CAddress> setAddrKnown;
     bool fGetAddr;
     std::set<uint256> setKnown;
-    uint256 hashCheckpointKnown; // known sent sync-checkpoint
+    uint256 hashCheckpointKnown; // last known sent sync-checkpoint
 
     // inventory based relay
     mruset<CInv> setInventoryKnown;
