@@ -62,8 +62,8 @@ void OptionsModel::Init()
         SoftSetBoolArg("-detachdb", settings.value("detachDB").toBool());
     if (!language.isEmpty())
         SoftSetArg("-lang", language.toStdString());
-    if (settings.contains("fDarkEnabled"))
-        SoftSetBoolArg("-torproxy", settings.value("fDarkEnabled").toBool());
+    if (settings.contains("fTorEnabled"))
+        SoftSetBoolArg("-torproxy", settings.value("fTorEnabled").toBool());
 
 }
 
@@ -209,8 +209,8 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             MapPort();
             break;
         case TorProxyEnabled:
-            fDarkEnabled = value.toBool();
-            settings.setValue("fDarkEnabled", fDarkEnabled);
+            fTorEnabled = value.toBool();
+            settings.setValue("fTorEnabled", fTorEnabled);
             break;
         case MinimizeOnClose:
             fMinimizeOnClose = value.toBool();
