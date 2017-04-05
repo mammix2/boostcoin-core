@@ -581,7 +581,7 @@ void BitcoinGUI::setNumConnections(int count)
     labelConnectionsIcon->setToolTip(tr("%n active connection(s) to BoostCoin network", "", count));
 
 
-    if (fDarkEnabled)
+    if (fTorEnabled)
     {
         labelOnionIcon->setPixmap(QIcon(":/icons/onion_small").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
         labelOnionIcon->setToolTip(tr("Connected to the Tor network"));
