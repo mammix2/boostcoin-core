@@ -1057,15 +1057,6 @@ void ThreadMapPort2(void* parg)
     struct UPNPDev * devlist = 0;
     char lanaddr[64];
 
-//#ifndef UPNPDISCOVER_SUCCESS
-//    /* miniupnpc 1.5 */
-//    devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0);
-//#else
-//    /* miniupnpc 1.6 */
-//    int error = 0;
-//    devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0, &error);
-//#endif
-
 #ifndef UPNPDISCOVER_SUCCESS
     /* miniupnpc 1.5 */
     devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0);
