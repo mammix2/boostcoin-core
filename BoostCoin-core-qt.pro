@@ -29,7 +29,6 @@ win32 {
     LIBS += -lws2_32 -lole32 -loleaut32 -luuid -lgdi32
     LIBS += -lboost_system-mgw49-mt-s-1_57 -lboost_filesystem-mgw49-mt-s-1_57 -lboost_program_options-mgw49-mt-s-1_57 -lboost_thread-mgw49-mt-s-1_57
     LIBS += -L"C:/deps/MinGW/msys/1.0/local/lib"
-    LIBS += -L"C:/deps/libcommuni-3.2.0/lib"
 
     INCLUDEPATH += "C:/deps/MinGW/msys/1.0/local/include"
 
@@ -63,8 +62,10 @@ UI_DIR = build
 
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
-    # Mac: compile for maximum compatibility (10.5, 32-bit)
-    macx:QMAKE_CXXFLAGS += -mmacosx-version-min=10.5 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk
+    macx:QMAKE_CXXFLAGS += -mmacosx-version-min=10.8 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+    macx:QMAKE_CFLAGS += -mmacosx-version-min=10.8 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+    macx:QMAKE_LFLAGS += -mmacosx-version-min=10.8 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+    macx:QMAKE_OBJECTIVE_CFLAGS += -mmacosx-version-min=10.8 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
 
     !windows:!macx {
         # Linux: static link
@@ -715,6 +716,8 @@ macx: {
     QMAKE_CXXFLAGS += -arch x86_64 -stdlib=libc++
     QMAKE_CFLAGS += -arch x86_64
     QMAKE_LFLAGS += -arch x86_64 -stdlib=libc++
+    INCLUDEPATH += /Users/mammix2/Desktop/deps/openssl-1.0.1l/include
+    LIBS += /Users/mammix2/Desktop/deps/openssl-1.0.1l
 }
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
