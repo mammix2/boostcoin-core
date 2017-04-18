@@ -3,7 +3,7 @@
 
 
 TEMPLATE = app
-VERSION = 4.4.8.0
+VERSION = 4.4.8.1
 INCLUDEPATH += src src/json \
     src/qt \
     src/tor
