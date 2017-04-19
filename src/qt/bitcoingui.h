@@ -47,6 +47,7 @@ public:
         functionality.
     */
     void setWalletModel(WalletModel *walletModel);
+    QAction *aboutOnlineHelp;
 
 protected:
     void changeEvent(QEvent *e);
@@ -139,6 +140,8 @@ public slots:
     */
     void askFee(qint64 nFeeRequired, bool *payFee);
     void handleURI(QString strURI);
+    /** Show Online help pages*/
+    void aboutOnlineHelpClicked();
 
 private slots:
     /** Switch to overview (home) page */
