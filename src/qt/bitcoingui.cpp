@@ -321,8 +321,6 @@ void BitcoinGUI::createActions()
 #endif
     aboutQtAction->setToolTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
-    aboutOnlineHelp->setToolTip(tr("Find help online"));
-    aboutOnlineHelp = new QAction(QIcon(":/icons/bitcoin"), tr("&Online help"), this);
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
     optionsAction->setToolTip(tr("Modify configuration options for BoostCoin"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
@@ -349,7 +347,6 @@ void BitcoinGUI::createActions()
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
     connect(SplitStakeAction, SIGNAL(triggered()), this, SLOT(charityClicked()));
-	connect(aboutOnlineHelp, SIGNAL(triggered()), this, SLOT(aboutOnlineHelpClicked()));
     connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
     connect(optionsAction, SIGNAL(triggered()), this, SLOT(optionsClicked()));
     connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
@@ -409,7 +406,6 @@ void BitcoinGUI::createMenuBar()
     help->addSeparator();
     help->addAction(aboutAction);
     help->addAction(aboutQtAction);
-    help->addAction(aboutOnlineHelp);
 }
 
 void BitcoinGUI::createToolBars(QToolBar* toolbar)
@@ -561,11 +557,6 @@ void BitcoinGUI::aboutClicked()
     AboutDialog dlg;
     dlg.setModel(clientModel);
     dlg.exec();
-}
-
-void BitcoinGUI::aboutOnlineHelpClicked()
-{
-    QDesktopServices::openUrl(QUrl("https://bost.link/Help/index.html", QUrl::TolerantMode));
 }
 
 void BitcoinGUI::charityClicked()

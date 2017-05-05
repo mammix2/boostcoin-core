@@ -23,26 +23,29 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 }
 
 win32 {
-    LIBS += -lshlwapi
-    LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
-    LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX -lcrypt32
-    LIBS += -lws2_32 -lole32 -loleaut32 -luuid -lgdi32
-    LIBS += -lboost_system-mgw49-mt-s-1_57 -lboost_filesystem-mgw49-mt-s-1_57 -lboost_program_options-mgw49-mt-s-1_57 -lboost_thread-mgw49-mt-s-1_57
-    LIBS += -L"C:/deps/MinGW/msys/1.0/local/lib"
+#    LIBS += -lshlwapi
+#    LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
+#    LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX -lcrypt32
+#    LIBS += -lws2_32 -lole32 -loleaut32 -luuid -lgdi32
+#    LIBS += -lboost_system-mgw49-mt-s-1_57 -lboost_filesystem-mgw49-mt-s-1_57 -lboost_program_options-mgw49-mt-s-1_57 -lboost_thread-mgw49-mt-s-1_57
+#    LIBS += -L"C:/deps/MinGW/msys/1.0/local/lib"
 
-    INCLUDEPATH += "C:/deps/MinGW/msys/1.0/local/include"
+#    INCLUDEPATH += "C:/deps/MinGW/msys/1.0/local/include"
+#    INCLUDEPATH += "C:\tools\msys2\mingw64\include"
 
-    BOOST_LIB_SUFFIX=-mgw49-mt-s-1_57
-    BOOST_INCLUDE_PATH=C:/deps/boost_1_57_0
-    BOOST_LIB_PATH=C:/deps/boost_1_57_0/stage/lib
-    BDB_INCLUDE_PATH=C:/deps/db-4.8.30.NC/build_unix
-    BDB_LIB_PATH=C:/deps/db-4.8.30.NC/build_unix
-    OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1l/include
-    OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1l
-    MINIUPNPC_INCLUDE_PATH=C:/deps/
-    MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
-    QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.4
-    QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.4/.libs
+    BOOST_LIB_SUFFIX=-mgw63-mt-d-1_63
+    BOOST_INCLUDE_PATH=C:\tools\boost\x64\include\boost-1_63
+    BOOST_LIB_PATH=C:\tools\boost\boost_1_63_0\stage\lib
+    BDB_INCLUDE_PATH=C:\tools\berkeley-db\db4\x64\include
+    BDB_LIB_PATH=C:\tools\berkeley-db\db4\x64\lib
+    OPENSSL_INCLUDE_PATH=C:\tools\openssl\x64\include
+    OPENSSL_LIB_PATH=C:\tools\openssl\x64\lib
+    MINIUPNPC_INCLUDE_PATH=C:\tools\miniupnpc
+    MINIUPNPC_LIB_PATH=C:\tools\miniupnpc\miniupnpc
+    QRENCODE_INCLUDE_PATH=C:\tools\qrencode\x64\include
+    QRENCODE_LIB_PATH=C:\tools\qrencode\x64\lib
+    LIBEVENT_INCLUDE_PATH=C:\tools\libevent\x64\include
+    LIBEVENT_LIB_PATH=C:\tools\libevent\x64\lib
 
 }
 
@@ -75,13 +78,13 @@ contains(RELEASE, 1) {
 
 !win32 {
 # for extra security against potential buffer overflows: enable GCCs Stack Smashing Protection
-QMAKE_CXXFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
+QMAKE_CXXFLAGS *= -fstack-protector-all --param ssp-buffer-size=1 -Wa,-mbig-obj
 QMAKE_LFLAGS *= -fstack-protector-all --param ssp-buffer-size=1
 # We need to exclude this for Windows cross compile with MinGW 4.2.x, as it will result in a non-working executable!
 # This can be enabled for Windows, when we switch to MinGW >= 4.4.x.
 }
 # for extra security on Windows: enable ASLR and DEP via GCC linker flags
-win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat,--large-address-aware -static
+win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat, -static
 win32:QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 lessThan(QT_MAJOR_VERSION, 5): win32: QMAKE_LFLAGS *= -static
 
@@ -376,7 +379,7 @@ NO_LEVELDB=1
     QMAKE_EXTRA_TARGETS += genbuild
     DEFINES += HAVE_BUILD_INFO
 }
-
+USE_O3=1
 contains(USE_O3, 1) {
     message(Building O3 optimization flag)
     QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -641,7 +644,6 @@ OTHER_FILES += \
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
     macx:BOOST_LIB_SUFFIX = -mt
-    win32:BOOST_LIB_SUFFIX = -mgw49-mt-s-1_57
 }
 
 isEmpty(BOOST_THREAD_LIB_SUFFIX) {
@@ -732,7 +734,6 @@ LIBS += -lboost_system$$BOOST_LIB_SUFFIX \
     -lboost_filesystem$$BOOST_LIB_SUFFIX \
     -lboost_program_options$$BOOST_LIB_SUFFIX \
     -lboost_thread$$BOOST_THREAD_LIB_SUFFIX \
-    -lboost_date_time$$BOOST_THREAD_LIB_SUFFIX \
     -lboost_chrono$$BOOST_LIB_SUFFIX
 
 

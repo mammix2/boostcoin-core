@@ -1,0 +1,15 @@
+QMAKE_DEFAULT_INCDIRS = \
+    C:/tools/msys64/mingw64/include/c++/6.3.0 \
+    C:/tools/msys64/mingw64/include/c++/6.3.0/x86_64-w64-mingw32 \
+    C:/tools/msys64/mingw64/include/c++/6.3.0/backward \
+    C:/tools/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/6.3.0/include \
+    C:/tools/msys64/mingw64/include \
+    C:/tools/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/6.3.0/include-fixed \
+    C:/tools/msys64/mingw64/x86_64-w64-mingw32/include
+QMAKE_DEFAULT_LIBDIRS = \
+    C \
+    /tools/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/6.3.0/;C \
+    /tools/msys64/mingw64/lib/gcc/;C \
+    /tools/msys64/mingw64/x86_64-w64-mingw32/lib/;C \
+    /tools/msys64/mingw64/lib/;C \
+    /tools/msys64/mingw64/lib
