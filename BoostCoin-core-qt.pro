@@ -4,7 +4,7 @@ TEMPLATE = app
 DEFINES += FN1 FN2
 FN1 = boostcoin-core
 windows:FN2 = -qt-win-v
-VERSION = 4.4.8.2
+VERSION = 4.4.9.0
 TARGET = $$FN1$$FN2$$VERSION
 INCLUDEPATH += src src/json \
     src/qt \

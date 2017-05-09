@@ -23,6 +23,7 @@ static const uint256 CheckBlock11 ("9801f200e470a13aca3c3fd54f0a17e5945eea24b378
 static const uint256 CheckBlock12 ("9dcdc9959bb6d16f6fc852f8a77828779d265d45c52ec216f6a7d235a689ee1d"); // Checkpoint at block 600000
 static const uint256 CheckBlock13 ("000002539bf0373bd1adc04e30fcb9ae5f46f27694d3bdbbdd6b0195e709db5c"); // Checkpoint at block 811300
 static const uint256 CheckBlock14 ("00000c0d2c9d2d326ca6413eb362f8576366f4559837006f88da773ebf556fc2"); // Checkpoint at block 884400
+static const uint256 CheckBlock15 ("0000028d002d0e42a0aefae9eb7d526fc1e6a212f2af90fb893daf95dad0c729"); // Checkpoint at block 900000
 
 // Testnet Checkpoints
 //static const uint256 TestNetCheckBlock1 ("0000003b92febb5b04be82117fcbe7f1d422c305ddb4303e0d51ce32482d6304"); //Testnet Checkpoint at block 5000
