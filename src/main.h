@@ -13,6 +13,7 @@
 #include "hashblock.h"
 #include "checkblocks.h"
 #include <list>
+#include <QString>
 
 class CWallet;
 class CBlock;
@@ -43,6 +44,7 @@ static const int nTimeDriftCondition2 = 1461873600; // Thu, 28 Apr 2016 20:00:00
 #define FOUNDATION "BKqAh5ojyS7bkjaDHJEWXxMwKNUvUsNZak"
 #define FOUNDATION2 "B9o3E2gYR7NAZJi8iWJb8CAN2fchwn5Mfb"
 #define FOUNDATION_TEST "miiWpmBt9bMknbcoe4beokur4xAetJ9Nmz"
+#define FOUNDATION2_TEST "mkEC43NJNGWhm2DjeiBCPyKH74ixKzgFzG"
 
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
@@ -53,6 +55,7 @@ static const int fHaveUPnP = true;
 #else
 static const int fHaveUPnP = false;
 #endif
+
 
 inline int64_t PastDrift(int64_t nTime){
     if (nTime >= nTimeDriftCondition1 && nTime < nTimeDriftCondition2){

@@ -6,7 +6,7 @@
 #include "base58.h"
 #include "clientmodel.h"
 #include "bitcoinrpc.h"
-#include "pow_control.h"
+#include "chain_conditional.h"
 #include <sstream>
 #include <string>
 

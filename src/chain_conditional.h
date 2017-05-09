@@ -1,5 +1,5 @@
-#ifndef POW_CONTROL_H
-#define POW_CONTROL_H
+#ifndef CHAIN_CONDITIONAL_H
+#define CHAIN_CONDITIONAL_H
 
 extern bool fTestNet;
 
@@ -9,6 +9,9 @@ static const int P2_End = 10000000; // 0 coin reward PoW mining enabled for abou
 static const int P1_End_TestNet = 150000;
 static const int P2_Start_TestNet = 150010;
 static const int P2_End_TestNet = 10000000;
+static const int f2AddressChange = 950000;
+static const int f2AddressChange_TestNet= 50;
 
 
-#endif // POW_CONTROL_H
+
+#endif // CHAIN_CONDITIONAL_H

@@ -3,7 +3,7 @@
 TEMPLATE = app
 DEFINES += fName1 fName2
 fName1 = "boostcoin-core"
-VERSION = 4.4.9.2
+VERSION = 4.4.9.3
 contains(QT_ARCH, i386) {
     fName2 = "-qt-x86-v"
 } else {
@@ -540,9 +540,9 @@ HEADERS += src/qt/bitcoingui.h \
     src/sph_types.h \
     src/threadsafety.h \
     src/txdb-leveldb.h \
-    src/pow_control.h \
     src/checkblocks.h \
-    src/hashblock.h
+    src/hashblock.h \
+    src/chain_conditional.h
 
 SOURCES += src/qt/bitcoin.cpp \
     src/qt/bitcoingui.cpp \
