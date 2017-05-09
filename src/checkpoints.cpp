@@ -46,7 +46,7 @@ namespace Checkpoints
     static MapCheckpoints mapCheckpointsTestnet =
         boost::assign::map_list_of
             ( 0, hashGenesisBlockTestNet )
-            ( 5000, TestNetCheckBlock1 )
+//            ( 5000, TestNetCheckBlock1 )
 
         ;
 
