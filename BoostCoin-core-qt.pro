@@ -1,11 +1,15 @@
 # x13 version by Mammix2
 
 TEMPLATE = app
-DEFINES += FN1 FN2
-FN1 = boostcoin-core
-windows:FN2 = -qt-win-v
-VERSION = 4.4.9.0
-TARGET = $$FN1$$FN2$$VERSION
+DEFINES += fName1 fName2
+fName1 = "boostcoin-core"
+VERSION = 4.4.9.1
+contains(QT_ARCH, i386) {
+    fName2 = "-qt-x86-v"
+} else {
+    fName2 = "-qt-x64-v"
+}
+TARGET = $$fName1$$fName2$$VERSION
 INCLUDEPATH += src src/json \
     src/qt \
     src/tor
@@ -25,30 +29,59 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 }
 
 win32 {
-#    LIBS += -lshlwapi
-#    LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
-#    LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX -lcrypt32
-#    LIBS += -lws2_32 -lole32 -loleaut32 -luuid -lgdi32
-#    LIBS += -lboost_system-mgw49-mt-s-1_57 -lboost_filesystem-mgw49-mt-s-1_57 -lboost_program_options-mgw49-mt-s-1_57 -lboost_thread-mgw49-mt-s-1_57
-#    LIBS += -L"C:/deps/MinGW/msys/1.0/local/lib"
 
-#    INCLUDEPATH += "C:/deps/MinGW/msys/1.0/local/include"
-#    INCLUDEPATH += "C:\tools\msys2\mingw64\include"
+    ## Windows common build here
 
-    BOOST_LIB_SUFFIX=-mgw63-mt-d-1_63
-    BOOST_INCLUDE_PATH=C:\tools\boost\x64\include\boost-1_63
-    BOOST_LIB_PATH=C:\tools\boost\boost_1_63_0\stage\lib
-    BDB_INCLUDE_PATH=C:\tools\berkeley-db\db4\x64\include
-    BDB_LIB_PATH=C:\tools\berkeley-db\db4\x64\lib
-    OPENSSL_INCLUDE_PATH=C:\tools\openssl\x64\include
-    OPENSSL_LIB_PATH=C:\tools\openssl\x64\lib
-    MINIUPNPC_INCLUDE_PATH=C:\tools\miniupnpc
-    MINIUPNPC_LIB_PATH=C:\tools\miniupnpc\miniupnpc
-    QRENCODE_INCLUDE_PATH=C:\tools\qrencode\x64\include
-    QRENCODE_LIB_PATH=C:\tools\qrencode\x64\lib
-    LIBEVENT_INCLUDE_PATH=C:\tools\libevent\x64\include
-    LIBEVENT_LIB_PATH=C:\tools\libevent\x64\lib
+    contains(QT_ARCH, i386) {
+        message("32-Bit build")
+        message("Target build name:" $$TARGET)
 
+        LIBS += -lshlwapi
+        LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
+        LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX -lcrypt32
+        LIBS += -lws2_32 -lole32 -loleaut32 -luuid -lgdi32
+        LIBS += -lboost_system-mgw49-mt-s-1_57 -lboost_filesystem-mgw49-mt-s-1_57 -lboost_program_options-mgw49-mt-s-1_57 -lboost_thread-mgw49-mt-s-1_57
+        LIBS += -L"C:/deps/MinGW/msys/1.0/local/lib"
+
+        INCLUDEPATH += "C:/deps/MinGW/msys/1.0/local/include"
+
+        BOOST_LIB_SUFFIX=-mgw49-mt-s-1_57
+        BOOST_INCLUDE_PATH=C:/deps/boost_1_57_0
+        BOOST_LIB_PATH=C:/deps/boost_1_57_0/stage/lib
+        BDB_INCLUDE_PATH=C:/deps/db-4.8.30.NC/build_unix
+        BDB_LIB_PATH=C:/deps/db-4.8.30.NC/build_unix
+        OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1l/include
+        OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1l
+        MINIUPNPC_INCLUDE_PATH=C:/deps/
+        MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
+        QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.4
+        QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.4/.libs
+        LEVELDB_INCLUDE_PATH+="C:/tools/leveldb/leveldb/include" "C:/tools/leveldb/leveldb/helpers"
+        LEVELDB_LIB_PATH=C:/tools/leveldb/x86
+        LIBS += "C:/tools/leveldb/x86/libleveldb.a" "C:/tools/leveldb/x86/libmemenv.a"
+
+
+    } else {
+        message("64-Bit build")
+        message("Target build name:" $$TARGET)
+        BOOST_LIB_SUFFIX=-mgw63-mt-d-1_63
+        BOOST_INCLUDE_PATH=C:\tools\boost\x64\include\boost-1_63
+        BOOST_LIB_PATH=C:\tools\boost\boost_1_63_0\stage\lib
+        BDB_INCLUDE_PATH=C:\tools\berkeley-db\db4\x64\include
+        BDB_LIB_PATH=C:\tools\berkeley-db\db4\x64\lib
+        OPENSSL_INCLUDE_PATH=C:\tools\openssl\x64\include
+        OPENSSL_LIB_PATH=C:\tools\openssl\x64\lib
+        MINIUPNPC_INCLUDE_PATH=C:\tools\miniupnpc
+        MINIUPNPC_LIB_PATH=C:\tools\miniupnpc\miniupnpc
+        QRENCODE_INCLUDE_PATH=C:\tools\qrencode\x64\include
+        QRENCODE_LIB_PATH=C:\tools\qrencode\x64\lib
+        LIBEVENT_INCLUDE_PATH=C:\tools\libevent\x64\include
+        LIBEVENT_LIB_PATH=C:\tools\libevent\x64\lib
+        LEVELDB_INCLUDE_PATH+="C:/tools/leveldb/leveldb/include" "C:/tools/leveldb/leveldb/helpers"
+        LEVELDB_LIB_PATH=C:/tools/leveldb/x64
+        LIBS += "C:/tools/leveldb/x64/libleveldb.a" "C:/tools/leveldb/x64/libmemenv.a"
+
+    }
 }
 
 # for boost 1.37, add -mt to the boost libraries
@@ -145,8 +178,6 @@ contains(BITCOIN_NEED_QT_PLUGINS, 1) {
     QTPLUGIN += qcncodecs qjpcodecs qtwcodecs qkrcodecs qtaccessiblewidgets
 }
 
-INCLUDEPATH += src/leveldb/include src/leveldb/helpers
-LIBS += $$PWD/src/leveldb/libleveldb.a $$PWD/src/leveldb/libmemenv.a
 
 ##hashing sources
 SOURCES += \
@@ -352,26 +383,26 @@ SOURCES += src/tor/anonymize.cpp \
 SOURCES +=  src/lz4/lz4.c \
     src/xxhash/xxhash.c
 
-NO_LEVELDB=1
-!contains(NO_LEVELDB, 1) {
-    !win32 {
-        # we use QMAKE_CXXFLAGS_RELEASE even without RELEASE=1 because we use RELEASE to indicate linking preferences not -O preferences
-        genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a
-    } else {
-        # make an educated guess about what the ranlib command is called
-        isEmpty(QMAKE_RANLIB) {
-            QMAKE_RANLIB = $$replace(QMAKE_STRIP, strip, ranlib)
-        }
-        LIBS += -lshlwapi
-        genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libleveldb.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libmemenv.a
-    }
-    genleveldb.target = $$PWD/src/leveldb/libleveldb.a
-    genleveldb.depends = FORCE
-    PRE_TARGETDEPS += $$PWD/src/leveldb/libleveldb.a
-    QMAKE_EXTRA_TARGETS += genleveldb
-    # Gross ugly hack that depends on qmake internals, unfortunately there is no other way to do it.
-    QMAKE_CLEAN += $$PWD/src/leveldb/libleveldb.a; cd $$PWD/src/leveldb ; $(MAKE) clean
-}
+#NO_LEVELDB=1
+#!contains(NO_LEVELDB, 1) {
+#    !win32 {
+#        # we use QMAKE_CXXFLAGS_RELEASE even without RELEASE=1 because we use RELEASE to indicate linking preferences not -O preferences
+#        genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a
+#    } else {
+#        # make an educated guess about what the ranlib command is called
+#        isEmpty(QMAKE_RANLIB) {
+#            QMAKE_RANLIB = $$replace(QMAKE_STRIP, strip, ranlib)
+#        }
+#        LIBS += -lshlwapi
+#        genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libleveldb.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libmemenv.a
+#    }
+#    genleveldb.target = $$PWD/src/leveldb/libleveldb.a
+#    genleveldb.depends = FORCE
+#    PRE_TARGETDEPS += $$PWD/src/leveldb/libleveldb.a
+#    QMAKE_EXTRA_TARGETS += genleveldb
+#    # Gross ugly hack that depends on qmake internals, unfortunately there is no other way to do it.
+#    QMAKE_CLEAN += $$PWD/src/leveldb/libleveldb.a; cd $$PWD/src/leveldb ; $(MAKE) clean
+#}
 # regenerate src/build.h
 !windows|contains(USE_BUILD_INFO, 1) {
     genbuild.depends = FORCE
@@ -726,7 +757,7 @@ macx: {
 }
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
-INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH $$LIBEVENT_INCLUDE_PATH
+INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH $$LIBEVENT_INCLUDE_PATH $$LEVELDB_INCLUDE_PATH
 LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,) $$join(LIBEVENT_LIB_PATH,,-L,)
 LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
 LIBS += -levent -lz

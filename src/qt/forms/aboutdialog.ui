@@ -91,7 +91,7 @@
         <cursorShape>IBeamCursor</cursorShape>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Copyright © 2014 - 2016 &lt;a href=&quot;http://bost.link&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ffffff;&quot;&gt;The BoostCoin developers&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Copyright © 2014 - 2017  &lt;a href=&quot;http://bost.link&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#00007f;&quot;&gt;The BoostCoin developers&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="openExternalLinks">
         <bool>true</bool>

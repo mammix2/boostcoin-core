@@ -22,7 +22,7 @@ BEGIN
             VALUE "FileDescription",    "BoostCoin-Qt (OSS GUI client for BoostCoin)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "boostcoin-qt"
-            VALUE "LegalCopyright",     "2014-2016 The BoostCoin developers"
+            VALUE "LegalCopyright",     "2014-2017 The BoostCoin developers"
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
             VALUE "OriginalFilename",   "boostcoin-qt.exe"
             VALUE "ProductName",        "BoostCoin-Qt"
