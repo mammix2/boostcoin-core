@@ -41,7 +41,8 @@ static const int nTimeDriftCondition1 = 1457136000; // Sat, 05 Mar 2016 00:00:00
 static const int nTimeDriftCondition2 = 1461873600; // Thu, 28 Apr 2016 20:00:00 GMT
 
 #define FOUNDATION "BKqAh5ojyS7bkjaDHJEWXxMwKNUvUsNZak"
-#define FOUNDATION_TEST "myLSiixUQwdiGGvmSvZBNBHR7C8bmMkBdr"
+#define FOUNDATION2 "B9o3E2gYR7NAZJi8iWJb8CAN2fchwn5Mfb"
+#define FOUNDATION_TEST "miiWpmBt9bMknbcoe4beokur4xAetJ9Nmz"
 
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
