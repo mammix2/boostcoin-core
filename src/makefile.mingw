@@ -4,25 +4,31 @@
 
 # x13 Version by mammix2 (mammix2@hotmail.com)
 CXX ?= g++
-USE_UPNP:=-
+USE_UPNP:=1
 USE_IPV6:=1
 
-DEPSDIR?=/usr/local
-BOOST_SUFFIX?=-mgw49-mt-s-1_55
+
+#DEPSDIR?=/usr/local
+BOOST_SUFFIX?=-mgw63-mt-d-1_63
 
 INCLUDEPATHS= \
 	-I"$(CURDIR)" \
-	-I"c:/deps/boost_1_55_0" \
-	-I"c:/deps/db-4.8.30.NC/build_unix" \
-	-I"c:/deps/openssl-1.0.1i/include" \
-	-I"C:/deps/MinGW/msys/1.0/local/include"
+        -I"C:/tools/boost/x64/include/boost-1_63" \
+        -I"C:/tools/berkeley-db/db4/x64/include" \
+        -I"C:/tools/openssl/x64/include" \
+        -I"C:/tools/libevent/x64/include" \
+        -I"C:/tools/leveldb/leveldb/include" \
+        -I"C:/tools/leveldb/leveldb/helpers"
 
 LIBPATHS= \
-	-L"$(CURDIR)/leveldb" \
-	-L"c:/deps/boost_1_55_0/stage/lib" \
-	-L"c:/deps/db-4.8.30.NC/build_unix" \
-	-L"c:/deps/openssl-1.0.1i" \
-	-L"C:/deps/MinGW/msys/1.0/local/lib"
+        -L"C:/tools/leveldb/x64" \
+        -L"C:/tools/boost/boost_1_63_0/stage/lib" \
+        -L"C:/tools/berkeley-db/db4/x64/lib" \
+        -L"C:/tools/openssl/x64/lib" \
+        -L"C:/tools/libevent/x64/lib" \
+        -L"C:/tools/leveldb/x64" \
+        -L"C:/tools/leveldb/x64/libleveldb.a" \
+        -L"C:/tools/leveldb/x64/libmemenv.a"
 
 LIBS= \
 	-l leveldb \
@@ -37,7 +43,7 @@ LIBS= \
 	-l crypto \
 	-l event \
 	-l z
-
+QT += core gui network
 DEFS=-DWIN32 -D_WINDOWS -DBOOST_THREAD_USE_LIB -DBOOST_SPIRIT_THREADSAFE
 DEBUGFLAGS=-g
 CFLAGS=-mthreads -O3 -msse2 -w -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter $(DEBUGFLAGS) $(DEFS) $(INCLUDEPATHS)
@@ -49,10 +55,10 @@ ifndef USE_UPNP
 	override USE_UPNP = -
 endif
 ifneq (${USE_UPNP}, -)
-	INCLUDEPATHS += -I"C:\miniupnpc-1.6-mgw"
-	LIBPATHS += -L"C:\miniupnpc-1.6-mgw"
+        INCLUDEPATHS += -I"C:\tools\miniupnpc"
+        LIBPATHS += -L"C:\tools\miniupnpc\miniupnpc"
 	LIBS += -l miniupnpc -l iphlpapi
-	DEFS += -DSTATICLIB -DUSE_UPNP=$(USE_UPNP)
+        DEFS += -DSTATICLIB -DMINIUPNP_STATICLIB -DUSE_UPNP=$(USE_UPNP)
 endif
 
 ifneq (${USE_IPV6}, -)
@@ -170,7 +176,6 @@ OBJS= \
 	obj/rpcdump.o \
 	obj/rpcnet.o \
 	obj/rpcmining.o \
-	obj/rpcsmessage.o \
 	obj/rpcwallet.o \
 	obj/rpcblockchain.o \
 	obj/rpcrawtransaction.o \
@@ -186,7 +191,6 @@ OBJS= \
 	obj/scrypt-arm.o \
 	obj/scrypt-x86.o \
 	obj/scrypt-x86_64.o \
-	obj/smessage.o \
 	obj/json_spirit_reader.o \
 	obj/json_spirit_writer.o \
 	obj/txdb-leveldb.o \
@@ -194,9 +198,9 @@ OBJS= \
 
 all: boostcoind.exe
 
-LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
-DEFS += $(addprefix -I,$(CURDIR)/leveldb/include)
-DEFS += $(addprefix -I,$(CURDIR)/leveldb/helpers)
+#LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
+#DEFS += $(addprefix -I,$(CURDIR)/leveldb/include)
+#DEFS += $(addprefix -I,$(CURDIR)/leveldb/helpers)
 
 leveldb/libleveldb.a:
 	cd leveldb; make; cd ..
@@ -223,7 +227,7 @@ obj/%.o: %.c
 	rm -f $(@:%.o=%.d)
 
 obj/%.o: tor/%.c
-	$(CXX) -c $(xCXXFLAGS) -fpermissive -MMD -MF $(@:%.o=%.d) -o $@ $<
+	$(CC) -c $(xCXXFLAGS) -MMD -MF $(@:%.o=%.d) -o $@ $<
 	@cp $(@:%.o=%.d) $(@:%.o=%.P); \
 	sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 	-e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
