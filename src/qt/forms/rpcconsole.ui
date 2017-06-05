@@ -7,11 +7,35 @@
     <x>0</x>
     <y>0</y>
     <width>740</width>
-    <height>549</height>
+    <height>609</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>BoostCoin - Debug window</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton, QToolButton {
+        border: 4px solid #000000;
+        border-radius: 7px;
+        background-color: #000000;
+        color: white;
+        padding: 6px;
+        margin: 6px;
+}
+
+QPushButton:checked, QToolButton:checked {
+        color: #AEC6CF;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+        border-color: #AEC6CF;
+        color: #AEC6CF;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+        color: #444;
+        background-color: #222222;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
