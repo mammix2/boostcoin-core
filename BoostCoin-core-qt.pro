@@ -3,7 +3,7 @@
 TEMPLATE = app
 DEFINES += fName1 fName2
 fName1 = "boostcoin-core"
-VERSION = 4.5.0.0
+VERSION = 4.5.0.1
 
 contains(QT_ARCH, i386) {
     fName2 = "-qt-x86-v"

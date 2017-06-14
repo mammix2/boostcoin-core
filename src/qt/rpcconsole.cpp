@@ -211,6 +211,9 @@ RPCConsole::RPCConsole(QWidget *parent) :
     // set PROTOCOL_VERSION version label
     QString pVersion = QString::number(PROTOCOL_VERSION);
     ui->protocol_version->setText(pVersion);
+    // set MIN_PROTO_VERSION version label
+    QString pVersionMin = QString::number(MIN_PROTO_VERSION);
+    ui->min_protocol_version->setText(pVersionMin);
 
     startExecutor();
 
