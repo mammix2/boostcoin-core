@@ -755,6 +755,8 @@ macx: {
     QMAKE_LFLAGS += -arch x86_64 -stdlib=libc++
     INCLUDEPATH += /Users/mammix2/Desktop/deps/openssl-1.0.1l/include
     LIBS += /Users/mammix2/Desktop/deps/openssl-1.0.1l
+    INCLUDEPATH += src/leveldb/include src/leveldb/helpers
+    LIBS += $$PWD/src/leveldb/libleveldb.a $$PWD/src/leveldb/libmemenv.a
 }
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
