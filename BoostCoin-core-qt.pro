@@ -17,7 +17,7 @@ INCLUDEPATH += src src/json \
 QT += core gui network
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
-CONFIG += thread
+CONFIG += thread warn_off
 
 lessThan(QT_MAJOR_VERSION, 5) {
     CONFIG += static

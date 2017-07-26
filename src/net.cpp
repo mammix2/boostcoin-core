@@ -1201,10 +1201,12 @@ static const char *strMainNetOnionSeed[][1] = {
     {"5hrzeemkppcdalp3.onion"}, // node04
     {"uwbrmhzppueemse5.onion"}, // node03
     {"5kbw5bcuudj2s75s.onion"}, // node05
+
     {"3kt3ypmt63v7fhwg.onion"}, // bnode01
     {"bivpn37zx5g25u2g.onion"}, // bnode02
     {"dg5moxtmks3auqc5.onion"}, // bnode03
-    {"o2jjy6kkavi7wbx3.onion"}, // bnode04
+
+    {"o2jjy6kkavi7wbx3.onion"}, //future node
     {"rzqujgnsnejxkk3e.onion"}, //future node
     {"ylou7bnzivq2xgfc.onion"}, //future node
     {NULL}
