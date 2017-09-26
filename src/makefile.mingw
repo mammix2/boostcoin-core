@@ -3,33 +3,35 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 # x13 Version by mammix2 (mammix2@hotmail.com)
-CXX ?= g++
+
+CC=gcc
+CXX=g++
 USE_UPNP:=1
 USE_IPV6:=1
-
+STATIC:=1
 
 #DEPSDIR?=/usr/local
 BOOST_SUFFIX?=-mgw63-mt-d-1_63
 
 INCLUDEPATHS= \
 	-I"$(CURDIR)" \
-        -I"C:/tools/boost/x64/include/boost-1_63" \
-        -I"C:/tools/berkeley-db/db4/x64/include" \
-        -I"C:/tools/openssl/x64/include" \
-        -I"C:/tools/libevent/x64/include" \
-        -I"C:/tools/leveldb/leveldb/include" \
-        -I"C:/tools/leveldb/leveldb/helpers"
+        -I"/c/tools/boost/x64/include/boost-1_63/" \
+        -I"/c/tools/berkeley-db/db4/x64/include/" \
+        -I"/c/tools/openssl/x64/include/" \
+        -I"/c/tools/libevent/x64/include/" \
+        -I"/c/tools/leveldb/leveldb/include/" \
+        -I"/c/tools/leveldb/leveldb/helpers/"
 
 
 LIBPATHS= \
-        -L"C:/tools/leveldb/x64" \
-        -L"C:/tools/boost/boost_1_63_0/stage/lib" \
-        -L"C:/tools/berkeley-db/db4/x64/lib" \
-        -L"C:/tools/openssl/x64/lib" \
-        -L"C:/tools/libevent/x64/lib" \
-        -L"C:/tools/leveldb/x64" \
-        -L"C:/tools/leveldb/x64/libleveldb.a" \
-        -L"C:/tools/leveldb/x64/libmemenv.a"
+        -L"/c/tools/leveldb/x64/" \
+        -L"/c/tools/boost/boost_1_63_0/stage/lib/" \
+        -L"/c/tools/berkeley-db/db4/x64/lib/" \
+        -L"/c/tools/openssl/x64/lib/" \
+        -L"/c/tools/libevent/x64/lib/" \
+        -L"/c/tools/leveldb/x64/" \
+        -L"/c/tools/leveldb/x64/libleveldb.a" \
+        -L"/c/tools/leveldb/x64/libmemenv.a"
 
 LIBS= \
 	-l leveldb \
@@ -43,12 +45,12 @@ LIBS= \
 	-l ssl \
 	-l crypto \
 	-l event \
-	-l z
+        -l z
 
-DEFS=-DWIN32 -D_WINDOWS -DBOOST_THREAD_USE_LIB -DBOOST_SPIRIT_THREADSAFE -D__NO_SYSTEM_INCLUDES
+DEFS=-DWIN32 -D_WINDOWS -DBOOST_THREAD_USE_LIB -DBOOST_SPIRIT_THREADSAFE -D__NO_SYSTEM_INCLUDES 
 DEBUGFLAGS=-g
-CFLAGS=-mthreads -O3 -msse2 -w -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter $(DEBUGFLAGS) $(DEFS) $(INCLUDEPATHS)
-LDFLAGS=-Wl,--dynamicbase -Wl,--nxcompat -static -static-libgcc -static-libstdc++
+CFLAGS=-mthreads -O2 -msse2 -w -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter $(DEBUGFLAGS) $(DEFS) $(INCLUDEPATHS)
+LDFLAGS=-Wl,--dynamicbase -Wl,--nxcompat
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
 
@@ -56,8 +58,8 @@ ifndef USE_UPNP
 	override USE_UPNP = -
 endif
 ifneq (${USE_UPNP}, -)
-        INCLUDEPATHS += -I"C:\tools\miniupnpc"
-        LIBPATHS += -L"C:\tools\miniupnpc\miniupnpc"
+        INCLUDEPATHS += -I"C:/tools/miniupnpc"
+        LIBPATHS += -L"C:/tools/miniupnpc/miniupnpc"
 	LIBS += -l miniupnpc -l iphlpapi
         DEFS += -DSTATICLIB -DMINIUPNP_STATICLIB -DUSE_UPNP=$(USE_UPNP)
 endif
@@ -66,6 +68,24 @@ ifneq (${USE_IPV6}, -)
 	DEFS += -DUSE_IPV6=$(USE_IPV6)
 endif
 
+
+ifdef STATIC
+  LIBS += \
+	"/c/tools/boost/x64/lib/libboost_system-mgw63-mt-1_63.a" \
+	"/c/tools/boost/x64/lib/libboost_filesystem-mgw63-mt-1_63.a" \
+	"/c/tools/boost/x64/lib/libboost_program_options-mgw63-mt-1_63.a" \
+	"/c/tools/boost/x64/lib/libboost_thread-mgw63-mt-1_63.a" \
+        "/c/tools/boost/x64/lib/libboost_chrono-mgw63-mt-1_63.a" \
+        "/c/tools/libevent/x64/lib/libevent.a" \
+        "/c/tools/berkeley-db/db4/x64/lib/libdb_cxx-4.8.a" \
+        "/c/tools/leveldb/x64/libleveldb.a" \
+        "/c/tools/leveldb/x64/libmemenv.a" \
+        "/c/tools/openssl/x64/lib/libssl.a" \
+	"/c/tools/msys64/mingw64/lib/libz.a" \
+        "/c/tools/openssl/x64/lib/libcrypto.a"
+
+
+endif
 LIBS += -l kernel32 -l user32 -l gdi32 -l comdlg32 -l winspool -l winmm -l shell32 -l comctl32 -l ole32 -l oleaut32 -l uuid -l rpcrt4 -l advapi32 -l ws2_32 -l mswsock -l shlwapi
 # Hardening
 # Make some classes of vulnerabilities unexploitable in case one is discovered.
@@ -232,6 +252,9 @@ all: boostcoind.exe
 #obj/txdb-leveldb.o: leveldb/libleveldb.a
 
 obj/%.o: %.cpp $(HEADERS)
+	$(CXX) -c $(CFLAGS) -o $@ $<
+
+obj/anonymize.o: tor/anonymize.cpp
 	$(CXX) -c $(CFLAGS) -o $@ $<
 
 obj/scrypt-x86.o: scrypt-x86.S
