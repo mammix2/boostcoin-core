@@ -980,9 +980,15 @@ int64_t GetProofOfWorkReward(int64_t nFees)
         int64_t nSubsidy = 400000 * COIN;
         return nSubsidy + nFees;
     } else if (pindexBest->nHeight > 640400 && pindexBest->nHeight <= 641250 ) {
-        int64_t nSubsidy = 1.301 * COIN; // V2 PoW reward plus fees coverage, based on 2 minute blocks
+        int64_t nSubsidy = 1.301 * COIN; // spurious block reward history, fixed after
         return nSubsidy + nFees;
-    } else if (pindexBest->nHeight > 641250) {
+    } else if (pindexBest->nHeight > 641250 && pindexBest->nHeight <= 1060000) {
+        int64_t nSubsidy = 1.31 * COIN; // PoW adjustment to cover extra fees if needed
+        return nSubsidy + nFees;
+    } else if (pindexBest->nHeight > 1060000 && pindexBest->nHeight <= 1130000 ) {
+        int64_t nSubsidy = 101.31 * COIN; // Phase 3 PoW rewards + fees
+        return nSubsidy + nFees;
+    } else if (pindexBest->nHeight > 1130000) {
         int64_t nSubsidy = 1.31 * COIN; // PoW adjustment to cover extra fees if needed
         return nSubsidy + nFees;
     } else {
