@@ -224,6 +224,8 @@ RPCConsole::RPCConsole(QWidget *parent) :
         ui->labelTorLogo->setEnabled(true);
         ui->isTorProxy->setChecked(true);
         ui->isTorProxy->setText("Connected via native Tor proxy");
+    } else {
+        ui->openTorLogfileButton->setEnabled(false);
     }
 
 
