@@ -87,7 +87,7 @@ QPushButton:disabled, QToolButton:disabled {
        <item row="15" column="0">
         <widget class="QLabel" name="label_15">
          <property name="text">
-          <string>Network Protocol version</string>
+          <string>Min Protocol version</string>
          </property>
          <property name="indent">
           <number>5</number>
