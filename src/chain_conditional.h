@@ -9,8 +9,6 @@ static const int P2_End = 10000000; // 0 coin reward PoW mining enabled for abou
 static const int P1_End_TestNet = 150000;
 static const int P2_Start_TestNet = 150010;
 static const int P2_End_TestNet = 10000000;
-static const int f2AddressChange = 10000000; // future for foundation address change
-static const int f2AddressChange_TestNet= 50;
 
 
 
