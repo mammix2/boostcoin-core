@@ -985,10 +985,10 @@ int64_t GetProofOfWorkReward(int64_t nFees)
     } else if (pindexBest->nHeight > 641250 && pindexBest->nHeight <= 1060000) {
         int64_t nSubsidy = 1.31 * COIN; // PoW adjustment to cover extra fees if needed
         return nSubsidy + nFees;
-    } else if (pindexBest->nHeight > 1060000 && pindexBest->nHeight <= 1130000 ) {
+    } else if (pindexBest->nHeight > 1070000 && pindexBest->nHeight <= 1140000 ) {
         int64_t nSubsidy = 101.31 * COIN; // Phase 3 PoW rewards + fees
         return nSubsidy + nFees;
-    } else if (pindexBest->nHeight > 1130000) {
+    } else if (pindexBest->nHeight > 1140000) {
         int64_t nSubsidy = 1.31 * COIN; // PoW adjustment to cover extra fees if needed
         return nSubsidy + nFees;
     } else {
