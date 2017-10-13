@@ -2434,7 +2434,7 @@ bool ProcessBlock(CNode* pfrom, CBlock* pblock)
 		if (!pwalletMain->StakeForCharity() )
 			printf("ERROR While trying to send portion of stake reward to savings account");
     // boostcoin: if responsible for sync-checkpoint send it
-    if (pfrom && !CSyncCheckpoint::strMasterPrivKey.empty())
+	if (pfrom && !CSyncCheckpoint::strMasterPrivKey.empty() && (int)GetArg("-checkpointdepth", -1) >= 0)
         Checkpoints::SendSyncCheckpoint(Checkpoints::AutoSelectSyncCheckpoint());
 
     return true;
