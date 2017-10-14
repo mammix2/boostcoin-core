@@ -6,9 +6,9 @@ fName1 = "boostcoin-core"
 VERSION = 4.5.0.4
 
 contains(QT_ARCH, i386) {
-    fName2 = "-qt-x86-v"
+    fName2 = "-qt-x86-win-v"
 } else {
-    fName2 = "-qt-x64-v"
+    fName2 = "-qt-x64-win-v"
 }
 TARGET = $$fName1$$fName2$$VERSION
 INCLUDEPATH += src src/json \
