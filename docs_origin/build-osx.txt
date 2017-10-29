@@ -1,3 +1,6 @@
+!!!!!!!!!!!!!! NEEDS UPDATING !!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 Copyright (c) 2009-2012 Bitcoin Developers
 Distributed under the MIT/X11 software license, see the accompanying file
 license.txt or http://www.opensource.org/licenses/mit-license.php.  This
@@ -12,7 +15,7 @@ Laszlo Hanyecz <solar@heliacal.net>
 Douglas Huff <dhuff@jrbobdobbs.org>
 
 
-See readme-qt.rst for instructions on building BoostCoin QT, the
+See readme-qt.rst for instructions on building boostcoin QT, the
 graphical user interface.
 
 Tested on 10.5 and 10.6 intel.  PPC is not supported because it's big-endian.
