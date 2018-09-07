@@ -1666,23 +1666,15 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
             devCoin = 1.3 * COIN;
         }
 
-//        CBitcoinAddress address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
-//        CScript scriptPubKey;
-//        scriptPubKey.SetDestination(address.Get());
+        CBitcoinAddress address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
+        CScript scriptPubKey;
+        scriptPubKey.SetDestination(address.Get());
 
-//        CBitcoinAddress address;
-//        address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
+        CBitcoinAddress address;
+        address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
 
-//        CScript scriptPubKey;
-//        scriptPubKey.GetScriptForDestination(address.Get());
-
-        if (vtx[0].vout[1].scriptPubKey != GetRewardScriptAtHeight){
-                return error("ConnectBlock() : coinbase does not pay to the dev address)");
-        }
-        if (vtx[0].vout[1].nValue < devCoin){
-            return error("ConnectBlock() : coinbase does not pay enough to dev address");
-        }
-    }
+        CScript scriptPubKey;
+        scriptPubKey.GetScriptForDestination(address.Get());
 
     if (IsProofOfStake())
     {
