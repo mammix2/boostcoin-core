@@ -20,6 +20,7 @@
 #include <openssl/rsa.h>
 #include <openssl/rand.h>
 #include <openssl/bn.h>
+#include "base58.h"
 
 
 using namespace std;
@@ -1665,13 +1666,22 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
             devCoin = 1.3 * COIN;
         }
 
-        CBitcoinAddress address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
-        CScript scriptPubKey;
-        scriptPubKey.SetDestination(address.Get());
-        if (vtx[0].vout[1].scriptPubKey != scriptPubKey)
-            return error("ConnectBlock() : coinbase does not pay to the dev address)");
-        if (vtx[0].vout[1].nValue < devCoin)
+//        CBitcoinAddress address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
+//        CScript scriptPubKey;
+//        scriptPubKey.SetDestination(address.Get());
+
+//        CBitcoinAddress address;
+//        address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
+
+//        CScript scriptPubKey;
+//        scriptPubKey.GetScriptForDestination(address.Get());
+
+        if (vtx[0].vout[1].scriptPubKey != GetRewardScriptAtHeight){
+                return error("ConnectBlock() : coinbase does not pay to the dev address)");
+        }
+        if (vtx[0].vout[1].nValue < devCoin){
             return error("ConnectBlock() : coinbase does not pay enough to dev address");
+        }
     }
 
     if (IsProofOfStake())
@@ -2654,15 +2664,9 @@ bool LoadBlockIndex(bool fAllowNew)
                    }
                }
         }
-        block.print();
-        printf("block.GetHash() == %s\n", block.GetHash().ToString().c_str());
-        printf("block.hashMerkleRoot == %s\n", block.hashMerkleRoot.ToString().c_str());
-        printf("block.nTime = %u \n", block.nTime);
-        printf("block.nNonce = %u \n", block.nNonce);
 
         //// debug print
         assert(block.hashMerkleRoot == uint256("603add6547a4c67f12f5a5fb5100fb455e3515b05e58a44a29a4496f7fcaaaf7"));
-        block.print();
         assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
         assert(block.CheckBlock());
         // Start new block file

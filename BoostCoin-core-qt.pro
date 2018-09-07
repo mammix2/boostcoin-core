@@ -4,7 +4,7 @@ TEMPLATE = app
 DEFINES += fName1 fName2
 fName1 = "boostcoin-core"
 macx:TARGET = "boostcoin-Qt"
-VERSION = 4.6.0.0
+VERSION = 4.6.1.0
 QMAKE_TARGET_BUNDLE_PREFIX = co.boostcoin
 contains(QT_ARCH, i386) {
     fName2 = "-qt-x86-v"
