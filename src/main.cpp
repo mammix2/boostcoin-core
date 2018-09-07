@@ -1669,13 +1669,11 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         CBitcoinAddress address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
         CScript scriptPubKey;
         scriptPubKey.SetDestination(address.Get());
-
-        CBitcoinAddress address;
-        address(!fTestNet ? FOUNDATION : FOUNDATION_TEST);
-
-        CScript scriptPubKey;
-        scriptPubKey.GetScriptForDestination(address.Get());
-
+        if (vtx[0].vout[1].scriptPubKey != scriptPubKey)
+            return error("ConnectBlock() : coinbase does not pay to the dev address)");
+        if (vtx[0].vout[1].nValue < devCoin)
+            return error("ConnectBlock() : coinbase does not pay enough to dev address");
+    }
     if (IsProofOfStake())
     {
 
