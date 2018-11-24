@@ -1,0 +1,15 @@
+[Unit]
+Description=Boostcoin daemon
+After=network.target
+
+[Service]
+ExecStart=/home/boostcoin/boostcoind -daemon -conf=/home/boostcoin/.boostcoin/boostcoin.conf -pid=/run/boostcoin/boostcoind.pid
+# Creates /run/boostcoin owned by boostcoin
+RuntimeDirectory=boostcoind
+User=boostcoin
+Type=forking
+PIDFile=/run/boostcoin/boostcoind.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
