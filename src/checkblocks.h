@@ -5,7 +5,7 @@
 
 // Genesis block 0 hash
 static const uint256 hashGenesisBlock("00000e81cae8e8cbbf9679d53ff1df5e23062dc667a332fd121f86e68f5d25e3");
-static const uint256 hashGenesisBlockTestNet("0000bfc0a4fd7d2215718380aae7e92f0821b0c4785a64039b173840ea1c36fb");
+static const uint256 hashGenesisBlockTestNet("00000e81cae8e8cbbf9679d53ff1df5e23062dc667a332fd121f86e68f5d25e3");
 
 // Chechpoints to ensure the correct chain usage during sync
 
