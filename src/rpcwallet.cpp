@@ -74,7 +74,7 @@ string AccountFromValue(const Value& value)
 Value getinfo(const Array& params, bool fHelp)
 {
 
-    int isfTor = GetArg("-torproxy", 1);
+    int isfTor = GetArg("-torproxy", 0);
 
     if (fHelp || params.size() != 0)
         throw runtime_error(

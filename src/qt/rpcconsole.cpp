@@ -219,7 +219,7 @@ RPCConsole::RPCConsole(QWidget *parent) :
 
     clear();
 
-    int isfTor = GetArg("-torproxy", 1);
+    int isfTor = GetArg("-torproxy", 0);
     if (isfTor == 1) {
         ui->labelTorLogo->setEnabled(true);
         ui->isTorProxy->setChecked(true);
